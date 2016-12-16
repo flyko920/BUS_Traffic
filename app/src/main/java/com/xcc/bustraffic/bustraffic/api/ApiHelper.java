@@ -1,20 +1,24 @@
 package com.xcc.bustraffic.bustraffic.api;
 
-import com.xcc.bustraffic.bustraffic.bean.BastBean;
 import com.xcc.bustraffic.bustraffic.comfig.ApiComfig;
-import com.xcc.bustraffic.library.net.RetrofitUtils;
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by flykozhang on 2016/12/16.
  */
 
 public class ApiHelper<T> {
-    RetrofitUtils mRetrofitUtils;
+    Retrofit retrofit;
 
     public Object getInstance(Class<T> clazz){
-        if (mRetrofitUtils==null){
-            mRetrofitUtils=new RetrofitUtils();
+        if(retrofit==null){
+            retrofit = new Retrofit.Builder().
+                baseUrl(ApiComfig.BAST_URL).
+                addConverterFactory(GsonConverterFactory.create()).
+                build();
         }
-        return  mRetrofitUtils.create(ApiComfig.BAST_URL,clazz);
+        return retrofit.create(clazz);
     }
 }

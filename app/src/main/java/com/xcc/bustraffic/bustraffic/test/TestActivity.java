@@ -7,7 +7,7 @@ import android.widget.RelativeLayout;
 import android.widget.ToggleButton;
 
 import com.xcc.bustraffic.bustraffic.R;
-import com.xcc.bustraffic.bustraffic.api.BastBeanApi;
+import com.xcc.bustraffic.bustraffic.api.NetApi;
 import com.xcc.bustraffic.bustraffic.api.callback.BastBeanCallBack;
 import com.xcc.bustraffic.bustraffic.ui.activity.BaseActivity;
 
@@ -54,7 +54,7 @@ public class TestActivity extends BaseActivity {
 
 
     private void run5() {
-        BastBeanApi.getFeed(new BastBeanCallBack(null));
+        NetApi.getFeed(new BastBeanCallBack(null));
     }
 
 
