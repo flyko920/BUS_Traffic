@@ -5,6 +5,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.squareup.picasso.Picasso;
 import com.xcc.bustraffic.bustraffic.R;
 import com.xcc.bustraffic.bustraffic.api.NetApi;
 import com.xcc.bustraffic.bustraffic.api.callback.BastBeanCallBack;
@@ -16,6 +17,8 @@ import butterknife.Bind;
 public class TestActivity extends BaseActivity {
 
     private static final String URL = "http://192.168.0.101:8080/bus/services/api/weiXinPermission/getToken";
+    private static final String URL_TEST_INMAGE = "http://g.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=ad7e701b7ef0f736d8fe4b07326ed424/3801213fb80e7bec52fd4585292eb9389b506baa.jpg";
+    
     @Bind(R.id.button)
     Button button;
     @Bind(R.id.activity_test)
@@ -45,7 +48,8 @@ public class TestActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.button:
                 button.setText("点击变化了哦····");
-                imageView.setImageBitmap(ZXingUtils.createQRImage(URL,imageView.getWidth(),imageView.getHeight()));//在imageView中显示二维码图片
+//                imageView.setImageBitmap(ZXingUtils.createQRImage(URL,imageView.getWidth(),imageView.getHeight()));//在imageView中显示二维码图片
+                Picasso.with(mContext).load(URL_TEST_INMAGE).into(imageView);
                 break;
             default:
                 break;

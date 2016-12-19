@@ -6,7 +6,6 @@ import com.xcc.bustraffic.library.comfig.LibraryComfig;
 
 /**
  * 
-* @ClassName: FeiHuaLog
 * @Description: 自定义Log日志输出类，可以配置默认TAG，可以控制日志输出或者关闭
 * @author 张鹏飞
 *
