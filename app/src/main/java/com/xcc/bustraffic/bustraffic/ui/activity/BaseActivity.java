@@ -1,10 +1,12 @@
 package com.xcc.bustraffic.bustraffic.ui.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
 import com.xcc.bustraffic.bustraffic.R;
 import com.xcc.bustraffic.bustraffic.ui.UIInterface;
 import com.xcc.bustraffic.library.utils.ClickHelperUtils;
@@ -15,6 +17,7 @@ import butterknife.ButterKnife;
  * 基类
  */
 public abstract class BaseActivity extends FragmentActivity implements View.OnClickListener , UIInterface {
+    public Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,16 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         initListener();
         initData();
         regCommonBtn();
+        mContext = this;
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     /** 在多个界面间都存在的按钮，点击事件已经由Base处理，那么将点击事件注册也统一处理掉 */
@@ -33,6 +46,15 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         if (view != null) {
             view.setOnClickListener(this);
         }
+    }
+
+    /**
+     * 推出当前APP
+     */
+    protected void exit(){
+        MobclickAgent.onKillProcess(mContext);
+        android.os.Process.killProcess(android.os.Process.myPid());  //获取PID
+        System.exit(0);   //常规java、c#的标准退出法，返回值为0代表正常退出
     }
 
     @Override

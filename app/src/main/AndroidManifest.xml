@@ -2,10 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xcc.bustraffic.bustraffic">
 
-    <!--权限列表-->
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
-
+    <!--友盟统计权限列表-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -22,6 +24,10 @@
             </intent-filter>
         </activity>
         <!--<activity android:name=".test.TestActivity"></activity>-->
+
+        <!--友盟统计AppKey和渠道ID-->
+        <meta-data android:value="58576275f29d9819c2001587" android:name="UMENG_APPKEY"/>//小车车车机APP在友盟统计的APPKey_id
+        <meta-data android:value="debug" android:name="UMENG_CHANNEL"/>
     </application>
 
 </manifest>

@@ -2,27 +2,26 @@ package com.xcc.bustraffic.bustraffic.test;
 
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.ToggleButton;
 
 import com.xcc.bustraffic.bustraffic.R;
 import com.xcc.bustraffic.bustraffic.api.NetApi;
 import com.xcc.bustraffic.bustraffic.api.callback.BastBeanCallBack;
 import com.xcc.bustraffic.bustraffic.ui.activity.BaseActivity;
+import com.xcc.bustraffic.library.utils.ZXingUtils;
 
 import butterknife.Bind;
 
 public class TestActivity extends BaseActivity {
 
+    private static final String URL = "http://192.168.0.101:8080/bus/services/api/weiXinPermission/getToken";
     @Bind(R.id.button)
     Button button;
-    @Bind(R.id.toggleButton)
-    ToggleButton toggleButton;
-    @Bind(R.id.checkBox)
-    CheckBox checkBox;
     @Bind(R.id.activity_test)
     RelativeLayout activityTest;
+    @Bind(R.id.imageView)
+    ImageView imageView;
 
     @Override
     public int getLayoutId() {
@@ -46,6 +45,7 @@ public class TestActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.button:
                 button.setText("点击变化了哦····");
+                imageView.setImageBitmap(ZXingUtils.createQRImage(URL,imageView.getWidth(),imageView.getHeight()));//在imageView中显示二维码图片
                 break;
             default:
                 break;
@@ -63,32 +63,6 @@ public class TestActivity extends BaseActivity {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_test);
-//        run5();
-//    }
-//
 //
 //    public void run(){
 //        // 构建Retrofit实例
