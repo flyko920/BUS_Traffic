@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
 import com.xcc.bustraffic.bustraffic.R;
 import com.xcc.bustraffic.bustraffic.ui.UIInterface;
 import com.xcc.bustraffic.library.utils.ClickHelperUtils;
@@ -25,12 +26,20 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = View.inflate(getActivity(), getLayoutId(), null);
-        ButterKnife.bind(getActivity());
         initListener();
         initData();
         regCommonBtn();
         return view;
     }
+
+//    public void onResume() {
+//        super.onResume();
+//        MobclickAgent.onPageStart("MainScreen"); //统计页面，"MainScreen"为页面名称，可自定义
+//    }
+//    public void onPause() {
+//        super.onPause();
+//        MobclickAgent.onPageEnd("MainScreen");
+//    }
 
     /** 返回viewId引用的view */
     protected View findViewById(int viewId) {

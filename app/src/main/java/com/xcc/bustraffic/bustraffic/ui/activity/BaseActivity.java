@@ -24,7 +24,6 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.bind(this);
-//        initView();
         initListener();
         initData();
         regCommonBtn();
@@ -33,7 +32,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
 
     public void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
+        MobclickAgent.onResume(this);   //统计时长
     }
     public void onPause() {
         super.onPause();
