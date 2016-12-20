@@ -10,17 +10,11 @@ import retrofit2.Callback;
  */
 
 public class NetApi {
-    static ApiInterface mApiHelper;
-
-    private static void init(){
-        if (mApiHelper==null){
-            mApiHelper = (ApiInterface) new ApiHelper<ApiInterface>().getInstance(ApiInterface.class);
-        }
-    }
+    static ApiInterface mApiHelper = (ApiInterface) new ApiHelper<ApiInterface>().getInstance(ApiInterface.class);
 
     public static void getFeed(Callback callback){
-        init();
         Call<BastBean> mCall = mApiHelper.getFeed();
         mCall.enqueue(callback);
     }
+
 }

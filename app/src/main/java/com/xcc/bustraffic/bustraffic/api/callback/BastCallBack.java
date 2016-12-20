@@ -31,6 +31,5 @@ public class BastCallBack<T> implements Callback<T> {
             progressBar.setVisibility(View.INVISIBLE);
         }
         L.d(errmsg);
-
     }
 }

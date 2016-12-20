@@ -12,11 +12,14 @@ import retrofit2.Response;
 /**
  * Created by flykozhang on 2016/12/16.
  */
-
 public class BastBeanCallBack extends BastCallBack<BastBean> {
 
     private final ProgressBar mProgressBar;
 
+    /**
+     * 可以通过参数把UI的VIEW传到Callback中进行处理
+     * @param progressBar
+     */
     public BastBeanCallBack(ProgressBar progressBar) {
         super(progressBar);
         this.mProgressBar = progressBar;
