@@ -12,7 +12,6 @@ import com.umeng.analytics.MobclickAgent;
 import com.xcc.bustraffic.bustraffic.R;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
 
