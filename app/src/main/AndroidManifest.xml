@@ -2,21 +2,27 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xcc.bustraffic.bustraffic">
 
-
-    <!--友盟统计权限列表-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- 友盟统计权限列表 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <!--<activity android:name=".MainActivity">-->
-        <activity android:name=".test.TestActivity"
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="58576275f29d9819c2001587" /> <!-- 友盟统计AppKey和渠道ID -->
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="debug" /> <!-- 小车车车机APP在友盟统计的APPKey_id -->
+
+        <activity
+            android:name=".ui.activity.SplashActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,11 +30,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".test.TestActivity"></activity>-->
-
-        <!--友盟统计AppKey和渠道ID-->
-        <meta-data android:value="58576275f29d9819c2001587" android:name="UMENG_APPKEY"/>//小车车车机APP在友盟统计的APPKey_id
-        <meta-data android:value="debug" android:name="UMENG_CHANNEL"/>
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

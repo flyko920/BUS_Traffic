@@ -2,9 +2,17 @@
     <string name="app_name">BUSTraffic</string>
 
 
-
     <!--错误码列表-->
     <string name="errno_10001"> 获取微信服务器地址失败!</string>
     <string name="errno_12030">测试错误码2</string>
+
+
+    <string name="app_zh_name">小车车</string>
+    <string name="ad_text">开启4G之旅</string>
+
+    <string name="main_activate_card">激活你的流量卡</string>
+    <string name="main_activate_member">微信扫一扫二维码，成为小车车会员</string>
+    <string name="main_activate_over">已完成激活</string>
+    <string name="main_activate_false">暂不需要</string>
 
 </resources>
