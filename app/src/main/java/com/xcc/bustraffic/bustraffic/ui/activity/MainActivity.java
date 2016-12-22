@@ -1,24 +1,20 @@
 package com.xcc.bustraffic.bustraffic.ui.activity;
 
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
 import com.xcc.bustraffic.bustraffic.R;
+import com.xcc.bustraffic.bustraffic.ui.fragment.SimActivateFragment;
 
-import butterknife.Bind;
+
 
 public class MainActivity extends BaseActivity {
 
-    @Bind(R.id.imageView3)
-    ImageView imageView3;
-    @Bind(R.id.button3)
-    Button button3;
+    public SimActivateFragment mSimActivateFragment;
+
 
     @Override
     public int getLayoutId() {
@@ -28,23 +24,18 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-        imageView3.setOnClickListener(this);
+
     }
 
     @Override
     public void initData() {
-
+        mSimActivateFragment = new SimActivateFragment();
+        mFragmentTransaction.add(R.id.root, mSimActivateFragment,"mSimActivateFragment");
     }
 
     @Override
     public void processClick(View v) {
-        switch (v.getId()) {
-            case R.id.imageView3:
-                dialog1();
-                break;
-            default:
-                break;
-        }
+
     }
 
     private void dialog1() {
@@ -55,7 +46,7 @@ public class MainActivity extends BaseActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss(); //关闭dialog
                 Toast.makeText(MainActivity.this, "充值" + which, Toast.LENGTH_SHORT).show();
-                updataRechargeUi();
+//                updataRechargeUi();
             }
         });
         builder.setNegativeButton("暂不需要", new DialogInterface.OnClickListener() { //设置取消按钮
@@ -69,7 +60,4 @@ public class MainActivity extends BaseActivity {
         builder.create().show();
     }
 
-    private void updataRechargeUi() {
-        button3.setText("已充值");
-    }
 }

@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.umeng.analytics.MobclickAgent;
 import com.xcc.bustraffic.bustraffic.R;
 import com.xcc.bustraffic.bustraffic.ui.UIInterface;
 import com.xcc.bustraffic.library.utils.ClickHelperUtils;
@@ -26,6 +25,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = View.inflate(getActivity(), getLayoutId(), null);
+        ButterKnife.bind(this, view);
         initListener();
         initData();
         regCommonBtn();
