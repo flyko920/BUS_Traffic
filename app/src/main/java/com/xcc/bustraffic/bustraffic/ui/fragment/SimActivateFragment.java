@@ -1,10 +1,16 @@
 package com.xcc.bustraffic.bustraffic.ui.fragment;
 
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.xcc.bustraffic.bustraffic.R;
+import com.xcc.bustraffic.bustraffic.ui.activity.MainActivity;
+import com.xcc.bustraffic.bustraffic.view.XCCDialog;
 
 import butterknife.Bind;
 
@@ -22,8 +28,8 @@ public class SimActivateFragment extends BaseFragment {
     private SimActivateClickListener mSimActivateClickListener;
 
     public interface SimActivateClickListener{
-        void QRCodeClick();
-        void UpdataRechargeUi();
+        void setQRCodeClick();
+        void setUpdataRechargeUi(Button mButton);
     }
 
     public void setSimActivateClickListener(SimActivateClickListener simActivateClickListener){
@@ -52,20 +58,16 @@ public class SimActivateFragment extends BaseFragment {
         }
         switch (v.getId()) {
             case R.id.imageView3:
-//                dialog1();
-                mSimActivateClickListener.QRCodeClick();
+                mSimActivateClickListener.setQRCodeClick();
                 break;
             default:
                 break;
         }
-//        if(mSimActivateClickListener != null){
-//            mSimActivateClickListener.QRCodeClick();
-//        }
+
     }
 
-
-
-    private void updataRechargeUi(String text) {
-        button3.setText(text);
+    public void showDialog(final Activity activity) {
+        XCCDialog.showDialog(activity,mSimActivateClickListener,button3);
     }
+
 }

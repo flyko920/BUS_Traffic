@@ -14,9 +14,7 @@ import com.xcc.bustraffic.library.utils.ClickHelperUtils;
 
 import butterknife.ButterKnife;
 
-/**
- * Created by Administrator on 2015/11/13.
- */
+
 public abstract class BaseFragment extends Fragment implements View.OnClickListener , UIInterface {
 
     private View view;

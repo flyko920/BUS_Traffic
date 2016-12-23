@@ -1,9 +1,7 @@
 package com.xcc.bustraffic.bustraffic.ui.activity;
 
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.Button;
 
 import com.umeng.analytics.MobclickAgent;
 import com.xcc.bustraffic.bustraffic.R;
@@ -13,7 +11,7 @@ import com.xcc.bustraffic.bustraffic.ui.fragment.SimActivateFragment;
 
 public class MainActivity extends BaseActivity {
 
-    public SimActivateFragment mSimActivateFragment;
+    private SimActivateFragment mSimActivateFragment;
 
 
     @Override
@@ -24,12 +22,21 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-
+        mSimActivateFragment = new SimActivateFragment();
+        mSimActivateFragment.setSimActivateClickListener(new SimActivateFragment.SimActivateClickListener() {
+            @Override
+            public void setQRCodeClick() {
+                mSimActivateFragment.showDialog(MainActivity.this);
+            }
+            @Override
+            public void setUpdataRechargeUi(Button mButton) {
+                mButton.setText(R.string.main_sim_activate_recharge_over);
+            }
+        });
     }
 
     @Override
     public void initData() {
-        mSimActivateFragment = new SimActivateFragment();
         mFragmentTransaction.add(R.id.root, mSimActivateFragment,"mSimActivateFragment");
     }
 
@@ -38,26 +45,6 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    private void dialog1() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);  //先得到构造器
-        builder.setMessage("你的小车车还有10天到期，后期后将无法享受上网服务，请及时充值哦！"); //设置内容
-        builder.setPositiveButton("充值", new DialogInterface.OnClickListener() { //设置确定按钮
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss(); //关闭dialog
-                Toast.makeText(MainActivity.this, "充值" + which, Toast.LENGTH_SHORT).show();
-//                updataRechargeUi();
-            }
-        });
-        builder.setNegativeButton("暂不需要", new DialogInterface.OnClickListener() { //设置取消按钮
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                Toast.makeText(MainActivity.this, "暂不需要" + which, Toast.LENGTH_SHORT).show();
-            }
-        });
-        //参数都设置完成了，创建并显示出来
-        builder.create().show();
-    }
+
 
 }
