@@ -6,11 +6,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
 import com.xcc.bustraffic.bustraffic.R;
 import com.xcc.bustraffic.bustraffic.ui.UIInterface;
 import com.xcc.bustraffic.library.utils.ClickHelperUtils;
+import com.xcc.bustraffic.library.utils.ZXingUtils;
 
 import butterknife.ButterKnife;
 
@@ -18,6 +22,7 @@ import butterknife.ButterKnife;
 public abstract class BaseFragment extends Fragment implements View.OnClickListener , UIInterface {
 
     private View view;
+    private String UMFragmentTag;
 
     @Nullable
     @Override
@@ -30,14 +35,14 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         return view;
     }
 
-//    public void onResume() {
-//        super.onResume();
-//        MobclickAgent.onPageStart("MainScreen"); //统计页面，"MainScreen"为页面名称，可自定义
-//    }
-//    public void onPause() {
-//        super.onPause();
-//        MobclickAgent.onPageEnd("MainScreen");
-//    }
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(UMFragmentTag); //统计页面，"MainScreen"为页面名称，可自定义
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(UMFragmentTag);
+    }
 
     /** 返回viewId引用的view */
     protected View findViewById(int viewId) {
@@ -69,6 +74,11 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         }
     }
 
+    /**给fragment打上友盟统计页面数据的TAG*/
+    protected void setUMFragmentTag(String mUMFragmentTag){
+        this.UMFragmentTag = mUMFragmentTag;
+    }
+
     /** 显示一个内容为msg的吐司 */
     protected void toast(String msg) {
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
@@ -77,5 +87,19 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     /** 显示一个内容为msgid引用的string的吐司 */
     protected void toast(int msgId) {
         Toast.makeText(getActivity(), msgId, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 从一个url中动态显示一个二维码
+     * @param view  二维码显示的imageview
+     */
+    protected void shwoQRcode(final ImageView view, final String url){
+        view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                view.setImageBitmap(ZXingUtils.createQRImage(url, view.getWidth(), view.getHeight()));
+            }
+        });
     }
 }

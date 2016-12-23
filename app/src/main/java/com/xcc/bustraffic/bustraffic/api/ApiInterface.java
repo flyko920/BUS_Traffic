@@ -15,7 +15,7 @@ import retrofit2.http.Query;
 public interface ApiInterface {
 
     @GET("/bus/services/api/weiXinPermission/getToken")
-    Call<BastBean> getFeed();
+    Call<BastBean> getWeiXinPermission();
 
 
 

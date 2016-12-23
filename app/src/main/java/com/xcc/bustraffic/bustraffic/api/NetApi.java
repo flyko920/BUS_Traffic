@@ -13,7 +13,7 @@ public class NetApi {
     static ApiInterface mApiHelper = (ApiInterface) new ApiHelper<ApiInterface>().getInstance(ApiInterface.class);
 
     public static void getFeed(Callback callback){
-        Call<BastBean> mCall = mApiHelper.getFeed();
+        Call<BastBean> mCall = mApiHelper.getWeiXinPermission();
         mCall.enqueue(callback);
     }
 
