@@ -24,6 +24,16 @@ public class WebViewUtils {
         settings.setAppCacheEnabled(true);// 启动缓存
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);// 设置缓存模式
         settings.setDomStorageEnabled(true); // 开启 localStorage
+
+        // 设置可以支持缩放
+        settings.setSupportZoom(true);// 设置出现缩放工具
+        settings.setBuiltInZoomControls(true);//扩大比例的缩放
+        settings.setUseWideViewPort(true);
+
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);//自适应屏幕
+        settings.setLoadWithOverviewMode(true);
+
+
         webView.setWebViewClient(new WebViewClient() {  //使用自定义的WebViewClient
 
             @Override

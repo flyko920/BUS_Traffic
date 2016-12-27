@@ -11,7 +11,7 @@
     <string name="ad_text">开启4G之旅</string>
 
     <string name="main_activate_card">激活你的流量卡</string>
-    <string name="main_activate_member">微信扫一扫二维码，成为小车车会员</string>
+    <string name="main_activate_member">微信扫一扫二维码，成为Aicar会员</string>
     <string name="main_activate_over">已完成激活</string>
     <string name="main_activate_false">暂不需要</string>
     <string name="main_sim_activate_title">你的小车车还有10天到期，后期后将无法享受上网服务，请及时充值哦！</string>
