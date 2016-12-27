@@ -2,7 +2,6 @@ package com.xcc.bustraffic.bustraffic.ui.fragment;
 
 import android.app.Activity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,22 +19,18 @@ import butterknife.Bind;
 
 public class SimActivateFragment extends BaseFragment {
 
-    @Bind(R.id.imageView3)
-    ImageView imageView3;
-    @Bind(R.id.button3)
-    Button button3;
+    @Bind(R.id.sim_activate_imageview)
+    ImageView sim_activate_imageview;
+    @Bind(R.id.sim_activate_buttom_left)
+    TextView sim_activate_buttom_left;
     @Bind(R.id.activity_main)
     RelativeLayout activityMain;
-    @Bind(R.id.textView3)
-    TextView textView3;
-    @Bind(R.id.button2)
-    Button button2;
 
     private SimActivateClickListener mSimActivateClickListener;
 
     public interface SimActivateClickListener {
         void setQRCodeClick();
-        void setUpdataRechargeUi(Button mButton);
+        void setUpdataRechargeUi(TextView mButton);
     }
 
     public void setSimActivateClickListener(SimActivateClickListener simActivateClickListener) {
@@ -49,8 +44,8 @@ public class SimActivateFragment extends BaseFragment {
 
     @Override
     public void initListener() {
-        imageView3.setOnClickListener(this);
-        button3.setOnClickListener(this);
+        sim_activate_imageview.setOnClickListener(this);
+        sim_activate_buttom_left.setOnClickListener(this);
     }
 
     @Override
@@ -65,10 +60,10 @@ public class SimActivateFragment extends BaseFragment {
             return;
         }
         switch (v.getId()) {
-            case R.id.imageView3:
+            case R.id.sim_activate_imageview:
                 mSimActivateClickListener.setQRCodeClick();
                 break;
-            case R.id.button3:
+            case R.id.sim_activate_buttom_left:
                 activityMain.addView(WebViewUtils.getWebViewInstance(getActivity(), ApiComfig.URL_TEST_HTTP));
                 break;
         }
@@ -78,7 +73,7 @@ public class SimActivateFragment extends BaseFragment {
         if (mSimActivateClickListener == null) {
             return;
         }
-        XCCDialog.showDialog(activity, mSimActivateClickListener, button3);
+        XCCDialog.showDialog(activity, mSimActivateClickListener, sim_activate_buttom_left);
     }
 
 

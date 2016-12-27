@@ -3,7 +3,7 @@ package com.xcc.bustraffic.bustraffic.view;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
-import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xcc.bustraffic.bustraffic.R;
@@ -15,7 +15,7 @@ import com.xcc.bustraffic.bustraffic.ui.fragment.SimActivateFragment;
 
 public class XCCDialog {
 
-    public static void showDialog(final Activity mActivity, final SimActivateFragment.SimActivateClickListener mSimActivateClickListener, final Button button){
+    public static void showDialog(final Activity mActivity, final SimActivateFragment.SimActivateClickListener mSimActivateClickListener, final TextView button){
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);  //先得到构造器
         builder.setMessage(R.string.main_sim_activate_title); //设置内容
         builder.setPositiveButton(R.string.main_sim_activate_recharge, new DialogInterface.OnClickListener() { //设置确定按钮

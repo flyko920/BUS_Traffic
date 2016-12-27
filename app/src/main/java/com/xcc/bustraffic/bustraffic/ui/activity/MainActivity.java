@@ -1,8 +1,8 @@
 package com.xcc.bustraffic.bustraffic.ui.activity;
 
 import android.view.View;
-import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.umeng.analytics.MobclickAgent;
 import com.xcc.bustraffic.bustraffic.R;
@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity {
             }
 
             @Override
-            public void setUpdataRechargeUi(Button mButton) {
+            public void setUpdataRechargeUi(TextView mButton) {
                 mButton.setText(R.string.main_sim_activate_recharge_over);
             }
         });
