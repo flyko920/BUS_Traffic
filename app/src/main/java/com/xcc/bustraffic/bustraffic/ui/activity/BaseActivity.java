@@ -99,4 +99,10 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     protected void toast(int msgId) {
         Toast.makeText(this, msgId, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+    }
 }

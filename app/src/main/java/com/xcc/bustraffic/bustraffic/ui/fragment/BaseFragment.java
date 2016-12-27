@@ -102,4 +102,10 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
             }
         });
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
 }
