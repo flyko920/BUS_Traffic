@@ -8,12 +8,8 @@
     tools:context="com.xcc.bustraffic.bustraffic.ui.activity.MainActivity">
 
     <TextView
-        android:gravity="center_horizontal"
-        android:textSize="24sp"
-        android:textColor="@android:color/black"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="@string/main_activate_card"
+        style="@style/xcc_fonts_title"
         android:id="@+id/sim_activate_titile"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -21,11 +17,7 @@
 
     <TextView
         android:text="@string/main_activate_member"
-        android:gravity="center_horizontal"
-        android:textSize="21sp"
-        android:textColor="@android:color/black"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/xcc_fonts_subtitle"
         android:id="@+id/sim_activate_subtitile"
         android:layout_below="@+id/sim_activate_titile"
         android:layout_centerHorizontal="true"/>
@@ -42,29 +34,21 @@
 
 
     <TextView
+        style="@style/xcc_buttom_focus"
         android:text="@string/main_activate_over"
-        android:layout_width="150dp"
-        android:layout_height="@dimen/px_80"
-        android:textColor="@android:color/white"
-        android:gravity="center"
         android:id="@+id/sim_activate_buttom_left"
-        android:background="@color/pink"
         android:layout_below="@+id/sim_activate_imageview"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="@dimen/px_190"
+        android:layout_marginLeft="@dimen/px_240"
         android:layout_marginTop="@dimen/px_50" />
 
     <TextView
         android:text="@string/main_activate_false"
-        android:layout_width="150dp"
-        android:layout_height="@dimen/px_80"
-        android:gravity="center"
+        style="@style/xcc_buttom_common"
         android:id="@+id/sim_activate_buttom_right"
-        android:textColor="@color/pink"
-        android:background="@android:color/white"
         android:layout_below="@+id/sim_activate_imageview"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/px_190"
+        android:layout_marginRight="@dimen/px_240"
         android:layout_marginTop="@dimen/px_50"/>
 
 

@@ -1,10 +1,14 @@
 package com.xcc.bustraffic.bustraffic.ui.fragment;
 
 import android.app.Activity;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xcc.bustraffic.bustraffic.R;
 import com.xcc.bustraffic.bustraffic.comfig.ApiComfig;
@@ -12,6 +16,7 @@ import com.xcc.bustraffic.bustraffic.view.XCCDialog;
 import com.xcc.bustraffic.library.utils.WebViewUtils;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by flykozhang on 2016/12/22.
@@ -25,11 +30,20 @@ public class SimActivateFragment extends BaseFragment {
     TextView sim_activate_buttom_left;
     @Bind(R.id.activity_main)
     RelativeLayout activityMain;
+    @Bind(R.id.sim_activate_buttom_right)
+    TextView simActivateButtomRight;
 
     private SimActivateClickListener mSimActivateClickListener;
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
     public interface SimActivateClickListener {
         void setQRCodeClick();
+
         void setUpdataRechargeUi(TextView mButton);
     }
 
@@ -46,6 +60,7 @@ public class SimActivateFragment extends BaseFragment {
     public void initListener() {
         sim_activate_imageview.setOnClickListener(this);
         sim_activate_buttom_left.setOnClickListener(this);
+        simActivateButtomRight.setOnClickListener(this);
     }
 
     @Override

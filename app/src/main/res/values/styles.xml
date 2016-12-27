@@ -8,6 +8,43 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--字体基础样式-->
+    <style name="xcc_fonts_base">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
 
+    <!--按键基础样式-->
+    <style name="xcc_buttom_base">
+        <item name="android:layout_width">@dimen/px_339</item>
+        <item name="android:layout_height">@dimen/px_80</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!--焦点按键样式-->
+    <style name="xcc_buttom_focus" parent="xcc_buttom_base">
+        <item name="android:background">@drawable/focus_button_selector</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!--普通按键样式-->
+    <style name="xcc_buttom_common" parent="xcc_buttom_base">
+        <item name="android:background">@drawable/common_button_selector</item>
+        <item name="android:textColor">@color/xcc_pink</item>
+    </style>
+
+    <!--标题字体样式-->
+    <style name="xcc_fonts_title" parent="xcc_fonts_base">
+        <item name="android:textSize">@dimen/text_size_58_px</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+
+    <!--副标题字体样式-->
+    <style name="xcc_fonts_subtitle" parent="xcc_fonts_base">
+        <item name="android:textSize">@dimen/text_size_48_px</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
 
 </resources>

@@ -17,5 +17,12 @@
     <string name="main_sim_activate_title">你的小车车还有10天到期，后期后将无法享受上网服务，请及时充值哦！</string>
     <string name="main_sim_activate_recharge">充值</string>
     <string name="main_sim_activate_recharge_over">已充值</string>
+    <string name="activate_succeed_titile">恭喜你激活成功</string>
+    <string name="activate_succeed_sub_titile">您也可以在Aicar应用内查看流量和进行充值</string>
+    <string name="activate_succeed_know">知道了</string>
+    <string name="activate_failure_titile">抱歉，你尚未激活成功</string>
+    <string name="activate_failure_sub_titile">请在Aicar微信服务号进行激活，有任何疑问也可在服务号内咨询客服</string>
+    <string name="activate_failure_restart">重新扫码</string>
+    <string name="activate_failure_button_close">关闭</string>
 
 </resources>

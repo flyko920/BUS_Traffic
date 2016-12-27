@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/bg"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:text="@string/activate_succeed_titile"
+        style="@style/xcc_fonts_title"
+        android:layout_marginTop="@dimen/px_50"
+        android:id="@+id/activate_succeed_titile"/>
+
+    <TextView
+        android:text="@string/activate_succeed_sub_titile"
+        android:id="@+id/activate_succeed_sub_titile"
+        style="@style/xcc_fonts_subtitle"
+        android:layout_marginTop="@dimen/px_50"
+        android:layout_below="@+id/activate_succeed_titile" />
+    
+    <TextView
+        android:id="@+id/activate_succeed_button_konw"
+        style="@style/xcc_buttom_focus"
+        android:text="@string/activate_succeed_know"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/px_150"
+        android:layout_below="@+id/activate_succeed_sub_titile"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/bg"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:text="@string/activate_failure_titile"
+        style="@style/xcc_fonts_title"
+        android:layout_marginTop="@dimen/px_50"
+        android:id="@+id/activate_failure_titile"/>
+
+    <TextView
+        android:text="@string/activate_failure_sub_titile"
+        android:id="@+id/activate_failure_sub_titile"
+        style="@style/xcc_fonts_subtitle"
+        android:paddingLeft="@dimen/px_200"
+        android:paddingRight="@dimen/px_200"
+        android:layout_marginTop="@dimen/px_50"
+        android:layout_below="@+id/activate_failure_titile" />
+    
+    <TextView
+        android:id="@+id/activate_failure_button_restart"
+        style="@style/xcc_buttom_focus"
+        android:text="@string/activate_failure_restart"
+        android:layout_marginTop="@dimen/px_150"
+        android:layout_marginLeft="@dimen/px_220"
+        android:layout_below="@+id/activate_failure_sub_titile"/>
+
+    <TextView
+        android:id="@+id/activate_failure_button_close"
+        style="@style/xcc_buttom_common"
+        android:text="@string/activate_failure_button_close"
+        android:layout_marginTop="@dimen/px_150"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/px_220"
+        android:layout_below="@+id/activate_failure_sub_titile"/>
+
+</RelativeLayout>
