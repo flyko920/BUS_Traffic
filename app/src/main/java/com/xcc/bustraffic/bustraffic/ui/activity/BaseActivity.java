@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.umeng.analytics.MobclickAgent;
 import com.xcc.bustraffic.bustraffic.R;
 import com.xcc.bustraffic.bustraffic.ui.UIInterface;
+import com.xcc.bustraffic.bustraffic.ui.fragment.BaseFragment;
 import com.xcc.bustraffic.library.utils.ClickHelperUtils;
 
 import butterknife.ButterKnife;
@@ -35,6 +36,14 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         regCommonBtn();
         mContext = this;
 
+    }
+
+    public void showFragment(BaseFragment mFragment,int rootid){
+        mSupportFragmentManager.
+                beginTransaction().
+                replace(rootid, mFragment, mFragment.getClass().getSimpleName()).
+//                addToBackStack(null).
+                commit();
     }
 
     public void onResume() {

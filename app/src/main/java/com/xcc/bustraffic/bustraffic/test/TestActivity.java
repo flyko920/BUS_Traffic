@@ -53,7 +53,7 @@ public class TestActivity extends BaseActivity {
                 run5();
                 button.setText("点击变化了哦····");
 //                imageView.setImageBitmap(ZXingUtils.createQRImage(URL_TEST_HTTP,imageView.getWidth(),imageView.getHeight()));//在imageView中显示二维码图片
-                Picasso.with(mContext).load(URL_TEST_INMAGE).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).into(imageView);
+                Picasso.with(mContext).load(URL_TEST_INMAGE).placeholder(R.drawable.ic_launcher).error(R.drawable.ic_launcher).into(imageView);
                 break;
             default:
                 break;

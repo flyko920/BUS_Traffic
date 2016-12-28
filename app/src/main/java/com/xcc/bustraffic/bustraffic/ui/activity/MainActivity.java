@@ -1,5 +1,6 @@
 package com.xcc.bustraffic.bustraffic.ui.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -9,7 +10,6 @@ import com.umeng.analytics.MobclickAgent;
 import com.xcc.bustraffic.bustraffic.R;
 import com.xcc.bustraffic.bustraffic.comfig.ApiComfig;
 import com.xcc.bustraffic.bustraffic.ui.fragment.ActivateSucceedFragment;
-import com.xcc.bustraffic.bustraffic.ui.fragment.BaseFragment;
 import com.xcc.bustraffic.bustraffic.ui.fragment.SimActivateFragment;
 import com.xcc.bustraffic.library.utils.SharedPrefsUtil;
 import com.xcc.bustraffic.library.utils.SimInfoUtils;
@@ -50,7 +50,9 @@ public class MainActivity extends BaseActivity {
         mActivateSucceedFragment.setActivateSucceedClickListener(new ActivateSucceedFragment.ActivateSucceedClickListener() {
             @Override
             public void setOnClick() {
-                showFragment(mActivateSucceedFragment);
+//                showFragment(mActivateSucceedFragment,R.id.root);
+                MainActivity.this.startActivity(new Intent(MainActivity.this,MemberActivity.class));
+                MainActivity.this.finish();
             }
         });
         mSimActivateFragment.setSimActivateClickListener(new SimActivateFragment.SimActivateClickListener() {
@@ -68,18 +70,12 @@ public class MainActivity extends BaseActivity {
             }
             @Override
             public void showSucceedFragment() {
-                showFragment(mActivateSucceedFragment);
+                showFragment(mActivateSucceedFragment,R.id.root);
             }
         });
     }
 
-    public void showFragment(BaseFragment mFragment){
-        mSupportFragmentManager.
-                beginTransaction().
-                replace(R.id.root, mFragment, mFragment.getClass().getSimpleName()).
-                addToBackStack(null).
-                commit();
-    }
+
 
     @Override
     public void initData() {

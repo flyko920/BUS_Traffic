@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--左边部分-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/activity_member_left"
+        android:background="@color/xcc_pink"
+        android:layout_width="@dimen/px_220"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/activity_member_left_title"
+            android:text="@string/activity_member_left_title"
+            android:textSize="@dimen/px_48"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_180" />
+
+        <ImageView
+
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/member_image_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_member_left_member" />
+
+        <ImageView
+            android:id="@+id/activity_member_left_service"
+            android:layout_marginTop="@dimen/px_25"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/service_image_selector"
+            android:layout_width="@dimen/px_140"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/activity_member_left_setting"
+                android:layout_alignParentBottom="true"
+                android:text="@string/activity_member_left_setting"
+                android:textSize="@dimen/px_32"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_100" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <!--右边部分-->
+    <LinearLayout
+        android:id="@+id/activity_member_rghit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </LinearLayout>
+
+</LinearLayout>

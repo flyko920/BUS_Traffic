@@ -11,14 +11,14 @@
     <string name="ad_text">开启4G之旅</string>
 
     <string name="main_activate_card">激活你的流量卡</string>
-    <string name="main_activate_member">微信扫一扫二维码，成为Aicar会员</string>
+    <string name="main_activate_member">微信扫一扫二维码，成为aicar会员</string>
     <string name="main_activate_over">已完成激活</string>
     <string name="main_activate_false">暂不需要</string>
     <string name="main_sim_activate_title">你的小车车还有10天到期，后期后将无法享受上网服务，请及时充值哦！</string>
     <string name="main_sim_activate_recharge">充值</string>
     <string name="main_sim_activate_recharge_over">已充值</string>
     <string name="activate_succeed_titile">恭喜你激活成功</string>
-    <string name="activate_succeed_sub_titile">您也可以在Aicar应用内查看流量和进行充值</string>
+    <string name="activate_succeed_sub_titile">您也可以在aicar应用内查看流量和进行充值</string>
     <string name="activate_succeed_know">知道了</string>
     <string name="activate_failure_titile">抱歉，你尚未激活成功</string>
     <string name="activate_failure_sub_titile">请在Aicar微信服务号进行激活，有任何疑问也可在服务号内咨询客服</string>
@@ -26,5 +26,7 @@
     <string name="activate_failure_button_close">关闭</string>
     <string name="activate_succeed_no_sim">没有在您的设备发现sim卡</string>
     <string name="activate_succeed_sub_titile_no_sim">请检查aicar卡是否安装成功</string>
+    <string name="activity_member_left_title">aicar</string>
+    <string name="activity_member_left_setting">设置</string>
 
 </resources>
