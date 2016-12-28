@@ -26,8 +26,9 @@ public class ActivateSucceedFragment extends BaseFragment {
 
     private int mSimState;
 
-    public void setSimState(int mSimState){
+    public ActivateSucceedFragment setSimState(int mSimState){
         this.mSimState = mSimState;
+        return this;
     }
 
     @Override
@@ -60,8 +61,6 @@ public class ActivateSucceedFragment extends BaseFragment {
 
     @Override
     public void initData() {
-//        activateSucceedTitile.setText(ResourceArray.getSimStateTitleRes(mSimState));
-//        activateSucceedSubTitile.setText(ResourceArray.getSimStateSubTitleRes(mSimState));
         activateSucceedTitile.setText(ResStringArrayUtils.getResId(getActivity(),R.array.SimStateTitleRes,mSimState));
         activateSucceedSubTitile.setText(ResStringArrayUtils.getResId(getActivity(),R.array.SimStateSubTitleRes,mSimState));
     }

@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.xcc.bustraffic.bustraffic.R;
 import com.xcc.bustraffic.bustraffic.comfig.ApiComfig;
 import com.xcc.bustraffic.bustraffic.view.XCCDialog;
-import com.xcc.bustraffic.library.utils.SimInfoUtils;
 import com.xcc.bustraffic.library.utils.WebViewUtils;
 
 import butterknife.Bind;

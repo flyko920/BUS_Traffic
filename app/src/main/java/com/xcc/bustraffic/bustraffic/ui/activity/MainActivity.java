@@ -46,7 +46,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initListener() {
         mSimActivateFragment = new SimActivateFragment();
-        mActivateSucceedFragment = new ActivateSucceedFragment();
+        mActivateSucceedFragment = new ActivateSucceedFragment().setSimState(ActivateSucceedFragment.ACTIVATE_SUCCEED);
         mActivateSucceedFragment.setActivateSucceedClickListener(new ActivateSucceedFragment.ActivateSucceedClickListener() {
             @Override
             public void setOnClick() {
@@ -58,7 +58,6 @@ public class MainActivity extends BaseActivity {
             public void setQRCodeClick() {
                 mSimActivateFragment.showDialog(MainActivity.this);
             }
-
             @Override
             public void setUpdataRechargeUi(TextView mButton, ImageView mImageView) {
                 mButton.setText(R.string.main_sim_activate_recharge_over);
@@ -67,7 +66,6 @@ public class MainActivity extends BaseActivity {
                         "ismi="+SimInfoUtils.getSimLine1Number(MainActivity.this),
                         mImageView.getWidth(),mImageView.getHeight()));
             }
-
             @Override
             public void showSucceedFragment() {
                 showFragment(mActivateSucceedFragment);
