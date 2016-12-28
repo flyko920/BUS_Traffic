@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.xcc.bustraffic.bustraffic.R;
-import com.xcc.bustraffic.bustraffic.view.res.ResourceArray;
+import com.xcc.bustraffic.library.utils.ResStringArrayUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -60,8 +60,10 @@ public class ActivateSucceedFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        activateSucceedTitile.setText(ResourceArray.getSimStateTitleRes(mSimState));
-        activateSucceedSubTitile.setText(ResourceArray.getSimStateSubTitleRes(mSimState));
+//        activateSucceedTitile.setText(ResourceArray.getSimStateTitleRes(mSimState));
+//        activateSucceedSubTitile.setText(ResourceArray.getSimStateSubTitleRes(mSimState));
+        activateSucceedTitile.setText(ResStringArrayUtils.getResId(getActivity(),R.array.SimStateTitleRes,mSimState));
+        activateSucceedSubTitile.setText(ResStringArrayUtils.getResId(getActivity(),R.array.SimStateSubTitleRes,mSimState));
     }
 
     @Override
