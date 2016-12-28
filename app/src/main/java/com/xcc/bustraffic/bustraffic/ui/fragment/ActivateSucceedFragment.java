@@ -4,20 +4,44 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.xcc.bustraffic.bustraffic.R;
+import com.xcc.bustraffic.bustraffic.view.res.ResourceArray;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by flykozhang on 2016/12/27.
  */
 
 public class ActivateSucceedFragment extends BaseFragment {
+    public static final int ACTIVATE_SUCCEED = 0;
+    public static final int SIM_ERROR = 1;
+
     @Bind(R.id.activate_succeed_button_konw)
     TextView activateSucceedButtonKonw;
+    @Bind(R.id.activate_succeed_titile)
+    TextView activateSucceedTitile;
+    @Bind(R.id.activate_succeed_sub_titile)
+    TextView activateSucceedSubTitile;
+
+    private int mSimState;
+
+    public void setSimState(int mSimState){
+        this.mSimState = mSimState;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
+
+
     private ActivateSucceedClickListener mActivateSucceedClickListener;
 
     public interface ActivateSucceedClickListener {
-        void setOnClick(BaseFragment mBaseFragment);
+        void setOnClick();
     }
 
     public void setActivateSucceedClickListener(ActivateSucceedClickListener mActivateSucceedClickListener) {
@@ -36,18 +60,21 @@ public class ActivateSucceedFragment extends BaseFragment {
 
     @Override
     public void initData() {
-
+        activateSucceedTitile.setText(ResourceArray.getSimStateTitleRes(mSimState));
+        activateSucceedSubTitile.setText(ResourceArray.getSimStateSubTitleRes(mSimState));
     }
 
     @Override
     public void processClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.activate_succeed_button_konw:
-                mActivateSucceedClickListener.setOnClick(this);
+                if (1==mSimState){
+                    getActivity().onBackPressed();
+                }
+                mActivateSucceedClickListener.setOnClick();
                 break;
         }
     }
-
 
 
 }

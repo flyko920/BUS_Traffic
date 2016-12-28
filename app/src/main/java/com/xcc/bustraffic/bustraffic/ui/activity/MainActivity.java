@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.umeng.analytics.MobclickAgent;
 import com.xcc.bustraffic.bustraffic.R;
 import com.xcc.bustraffic.bustraffic.comfig.ApiComfig;
-import com.xcc.bustraffic.bustraffic.ui.callbcak.MyActivateSucceedClickListener;
 import com.xcc.bustraffic.bustraffic.ui.fragment.ActivateSucceedFragment;
 import com.xcc.bustraffic.bustraffic.ui.fragment.BaseFragment;
 import com.xcc.bustraffic.bustraffic.ui.fragment.SimActivateFragment;
@@ -35,11 +34,25 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
+    private void showSimErrorOrActivate() {
+        if(SimInfoUtils.getSimSerialNumber(this)==null){
+            mActivateSucceedFragment.setSimState(ActivateSucceedFragment.SIM_ERROR);
+            mFragmentTransaction.add(R.id.root, mActivateSucceedFragment, "mActivateSucceedFragment");
+        }else {
+            mFragmentTransaction.add(R.id.root, mSimActivateFragment, "mSimActivateFragment");
+        }
+    }
+
     @Override
     public void initListener() {
         mSimActivateFragment = new SimActivateFragment();
         mActivateSucceedFragment = new ActivateSucceedFragment();
-        mActivateSucceedFragment.setActivateSucceedClickListener(new MyActivateSucceedClickListener(this));
+        mActivateSucceedFragment.setActivateSucceedClickListener(new ActivateSucceedFragment.ActivateSucceedClickListener() {
+            @Override
+            public void setOnClick() {
+                showFragment(mActivateSucceedFragment);
+            }
+        });
         mSimActivateFragment.setSimActivateClickListener(new SimActivateFragment.SimActivateClickListener() {
             @Override
             public void setQRCodeClick() {
@@ -63,8 +76,6 @@ public class MainActivity extends BaseActivity {
     }
 
     public void showFragment(BaseFragment mFragment){
-//        toast(mFragment.getClass().getSimpleName());
-        toast(SimInfoUtils.getSimSerialNumber(this));
         mSupportFragmentManager.
                 beginTransaction().
                 replace(R.id.root, mFragment, mFragment.getClass().getSimpleName()).
@@ -75,10 +86,12 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initData() {
         initActiviateState();
+
         if (!isFirst && activated) {
             showWebView();
         } else {
-            mFragmentTransaction.add(R.id.root, mSimActivateFragment, "mSimActivateFragment");
+            showSimErrorOrActivate();
+
         }
     }
 
