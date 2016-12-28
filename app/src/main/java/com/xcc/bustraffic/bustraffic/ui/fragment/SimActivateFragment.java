@@ -17,7 +17,6 @@ import butterknife.ButterKnife;
 /**
  * Created by flykozhang on 2016/12/22.
  */
-
 public class SimActivateFragment extends BaseFragment {
 
     @Bind(R.id.sim_activate_imageview)
@@ -40,7 +39,7 @@ public class SimActivateFragment extends BaseFragment {
     public interface SimActivateClickListener {
         void setQRCodeClick();
 
-        void setUpdataRechargeUi(TextView mButton);
+        void setUpdataRechargeUi(TextView mButton,ImageView mImageView);
 
         void showSucceedFragment();
     }
@@ -63,7 +62,8 @@ public class SimActivateFragment extends BaseFragment {
 
     @Override
     public void initData() {
-//        shwoQRcode(imageView3, ApiComfig.URL_TEST_HTTP);
+        shwoQRcode(sim_activate_imageview, ApiComfig.URL_TEST_HTTP);
+//        SharedPrefsUtil.putObjectValue(getActivity(),"test",new BastBean(true,"0001","测试错误详细",null));
         setUMFragmentTag("SimActivateFragment");
     }
 
@@ -74,6 +74,7 @@ public class SimActivateFragment extends BaseFragment {
         }
         switch (v.getId()) {
             case R.id.sim_activate_imageview:
+//                toast(((BastBean)SharedPrefsUtil.getObjectValue(getActivity(),"test","获取数据失败",BastBean.class)).getErrorCode());
                 mSimActivateClickListener.setQRCodeClick();
                 break;
             case R.id.sim_activate_buttom_left:
@@ -81,6 +82,8 @@ public class SimActivateFragment extends BaseFragment {
                 break;
             case R.id.sim_activate_buttom_right:
                 mSimActivateClickListener.showSucceedFragment();
+//                ((BaseActivity)getActivity()).exit();
+//                getActivity().onBackPressed();
                 break;
         }
     }
@@ -89,7 +92,7 @@ public class SimActivateFragment extends BaseFragment {
         if (mSimActivateClickListener == null) {
             return;
         }
-        XCCDialog.showDialog(activity, mSimActivateClickListener, sim_activate_buttom_left);
+        XCCDialog.showDialog(activity, mSimActivateClickListener, sim_activate_buttom_left,sim_activate_imageview);
     }
 
 

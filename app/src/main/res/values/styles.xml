@@ -37,14 +37,14 @@
     <!--标题字体样式-->
     <style name="xcc_fonts_title" parent="xcc_fonts_base">
         <item name="android:textSize">@dimen/text_size_58_px</item>
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@color/xcc_black</item>
     </style>
 
 
     <!--副标题字体样式-->
     <style name="xcc_fonts_subtitle" parent="xcc_fonts_base">
         <item name="android:textSize">@dimen/text_size_48_px</item>
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@color/xcc_black</item>
     </style>
 
 </resources>

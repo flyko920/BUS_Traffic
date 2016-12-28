@@ -1,6 +1,7 @@
 package com.xcc.bustraffic.bustraffic.ui.activity;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -12,7 +13,9 @@ import com.xcc.bustraffic.bustraffic.ui.fragment.ActivateSucceedFragment;
 import com.xcc.bustraffic.bustraffic.ui.fragment.BaseFragment;
 import com.xcc.bustraffic.bustraffic.ui.fragment.SimActivateFragment;
 import com.xcc.bustraffic.library.utils.SharedPrefsUtil;
+import com.xcc.bustraffic.library.utils.SimInfoUtils;
 import com.xcc.bustraffic.library.utils.WebViewUtils;
+import com.xcc.bustraffic.library.utils.ZXingUtils;
 
 import butterknife.Bind;
 
@@ -44,8 +47,12 @@ public class MainActivity extends BaseActivity {
             }
 
             @Override
-            public void setUpdataRechargeUi(TextView mButton) {
+            public void setUpdataRechargeUi(TextView mButton, ImageView mImageView) {
                 mButton.setText(R.string.main_sim_activate_recharge_over);
+                mImageView.setImageBitmap(ZXingUtils.createQRImage(ApiComfig.URL_PAY+
+                        "phone="+SharedPrefsUtil.getValue(MainActivity.this,"phone","0")+
+                        "ismi="+SimInfoUtils.getSimLine1Number(MainActivity.this),
+                        mImageView.getWidth(),mImageView.getHeight()));
             }
 
             @Override
@@ -56,7 +63,8 @@ public class MainActivity extends BaseActivity {
     }
 
     public void showFragment(BaseFragment mFragment){
-        toast(mFragment.getClass().getSimpleName());
+//        toast(mFragment.getClass().getSimpleName());
+        toast(SimInfoUtils.getSimSerialNumber(this));
         mSupportFragmentManager.
                 beginTransaction().
                 replace(R.id.root, mFragment, mFragment.getClass().getSimpleName()).

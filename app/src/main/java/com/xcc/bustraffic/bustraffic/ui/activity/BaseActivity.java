@@ -63,7 +63,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     /**
      * 推出当前APP
      */
-    protected void exit() {
+    public void exit() {
         MobclickAgent.onKillProcess(mContext);
         android.os.Process.killProcess(android.os.Process.myPid());  //获取PID
         System.exit(0);   //常规java、c#的标准退出法，返回值为0代表正常退出

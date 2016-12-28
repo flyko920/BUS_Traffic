@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import com.google.gson.Gson;
+
 /**
  * SharedPref保存、读取，包含少数的基本属性的读取的工具类
  * SharedPrefsUtil
@@ -59,10 +61,11 @@ public class SharedPrefsUtil {
          Editor sp =  context.getSharedPreferences(SETTING, Context.MODE_PRIVATE).edit();  
          sp.putString(key, value);  
          sp.commit();  
-    }  
-    
+    }
+
+
     /**
-     * 
+     *
      * @Title: putValue
      * @Description: TODO(这里用一句话描述这个方法的作用)
      * @param @param context UI上下文
@@ -72,8 +75,8 @@ public class SharedPrefsUtil {
      * @return void    返回类型
      * @throws
      */
-    public static void putValue(Context context,String key, String value,String file_name) {  
-         Editor sp =  context.getSharedPreferences(file_name, Context.MODE_PRIVATE).edit();  
+    public static void putValue(Context context,String key, String value,String file_name) {
+         Editor sp =  context.getSharedPreferences(file_name, Context.MODE_PRIVATE).edit();
          sp.putString(key, value);  
          sp.commit();  
     }  
@@ -82,7 +85,39 @@ public class SharedPrefsUtil {
         Editor sp =  context.getSharedPreferences(SETTING, Context.MODE_PRIVATE).edit();  
         sp.putLong(key, value);  
         sp.commit();  
-   } 
+   }
+
+
+    /**
+     * 向SP文件中保存一个对象
+     * @param context
+     * @param key
+     * @param mObject
+     */
+    public static void putObjectValue(Context context,String key, Object mObject) {
+        Editor sp =  context.getSharedPreferences(SETTING, Context.MODE_PRIVATE).edit();
+        sp.putString(key, new Gson().toJson(mObject));
+        sp.commit();
+    }
+
+
+    /**
+     *在SP文件中获取一个对象
+     * @param context
+     * @param key
+     * @param defValue
+     * @param classOft
+     * @param
+     * @return
+     */
+    public static Object getObjectValue(Context context,String key, String defValue, Class<? extends Object> classOft) {
+        SharedPreferences sp =  context.getSharedPreferences(SETTING, Context.MODE_PRIVATE);
+        String value = sp.getString(key, defValue);
+        if (value==null){
+            return null;
+        }
+        return new Gson().fromJson(value,classOft);
+    }
     
     /**
      * 
@@ -147,6 +182,7 @@ public class SharedPrefsUtil {
         String value = sp.getString(key, defValue);  
         return value;  
     }
+
 
     /**
      * 
