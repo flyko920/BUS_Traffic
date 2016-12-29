@@ -1,6 +1,5 @@
 package com.xcc.bustraffic.bustraffic.ui.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,7 +12,6 @@ import com.xcc.bustraffic.bustraffic.ui.fragment.ServiceFragment;
 import com.xcc.bustraffic.bustraffic.ui.fragment.SettingFragment;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by flykozhang on 2016/12/28.
