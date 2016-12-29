@@ -62,7 +62,7 @@ public class TestActivity extends BaseActivity {
 
 
     private void run5() {
-        NetApi.getFeed(new BastBeanCallBack(null));
+        NetApi.getWeiXinPermission(new BastBeanCallBack(null));
     }
 
 

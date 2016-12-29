@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        aicar {
+            keyAlias 'aicar_sha1'
+            keyPassword 'aicar'
+            storeFile file('C:/Users/flykozhang/.android/aicar.keystore')
+            storePassword 'aicar'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
     defaultConfig {
@@ -27,4 +35,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.0.1'
     testCompile 'junit:junit:4.12'
     compile project(':library')
+    compile files('libs/BaiduTraceSDK_v2_1_15.jar')
 }

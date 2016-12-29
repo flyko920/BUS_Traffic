@@ -1,6 +1,5 @@
 package com.xcc.bustraffic.bustraffic.ui.activity;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -9,6 +8,7 @@ import android.widget.TextView;
 import com.umeng.analytics.MobclickAgent;
 import com.xcc.bustraffic.bustraffic.R;
 import com.xcc.bustraffic.bustraffic.comfig.ApiComfig;
+import com.xcc.bustraffic.bustraffic.ui.fragment.ActivateFailureFragment;
 import com.xcc.bustraffic.bustraffic.ui.fragment.ActivateSucceedFragment;
 import com.xcc.bustraffic.bustraffic.ui.fragment.SimActivateFragment;
 import com.xcc.bustraffic.library.utils.SharedPrefsUtil;
@@ -26,6 +26,7 @@ public class MainActivity extends BaseActivity {
     private ActivateSucceedFragment mActivateSucceedFragment;
     private boolean isFirst;
     private boolean activated;
+    private ActivateFailureFragment mActivateFailureFragment;
 
 
     @Override
@@ -45,17 +46,28 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initListener() {
+        mActivateFailureFragment = new ActivateFailureFragment();
         mSimActivateFragment = new SimActivateFragment();
         mActivateSucceedFragment = new ActivateSucceedFragment().setSimState(ActivateSucceedFragment.ACTIVATE_SUCCEED);
         mActivateSucceedFragment.setActivateSucceedClickListener(new ActivateSucceedFragment.ActivateSucceedClickListener() {
             @Override
             public void setOnClick() {
 //                showFragment(mActivateSucceedFragment,R.id.root);
-                MainActivity.this.startActivity(new Intent(MainActivity.this,MemberActivity.class));
-                MainActivity.this.finish();
+//                MainActivity.this.startActivity(new Intent(MainActivity.this,MemberActivity.class));
+//                MainActivity.this.finish();
             }
         });
         mSimActivateFragment.setSimActivateClickListener(new SimActivateFragment.SimActivateClickListener() {
+            @Override
+            public void showActivateState(String success) {
+                if("false".equals(success)){
+                    MainActivity.this.showFragment(mActivateFailureFragment,R.id.root);
+                }else{
+                    mActivateSucceedFragment.setSimState(ActivateSucceedFragment.ACTIVATE_SUCCEED);
+                    MainActivity.this.showFragment(mActivateSucceedFragment,R.id.root);
+                }
+            }
+
             @Override
             public void setQRCodeClick() {
                 mSimActivateFragment.showDialog(MainActivity.this);

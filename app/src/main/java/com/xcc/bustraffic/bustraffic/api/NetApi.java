@@ -12,8 +12,13 @@ import retrofit2.Callback;
 public class NetApi {
     static ApiInterface mApiHelper = (ApiInterface) new ApiHelper<ApiInterface>().getInstance(ApiInterface.class);
 
-    public static void getFeed(Callback callback){
+    public static void getWeiXinPermission(Callback callback){
         Call<BastBean> mCall = mApiHelper.getWeiXinPermission();
+        mCall.enqueue(callback);
+    }
+
+    public static void getUserActivateInfo(Callback callback,String imsi){
+        Call<BastBean> mCall = mApiHelper.getUserActivateInfo(imsi);
         mCall.enqueue(callback);
     }
 

@@ -18,5 +18,8 @@ public interface ApiInterface {
     Call<BastBean> getWeiXinPermission();
 
 
+    @GET("/bus/services/api/user/getUserInfo")
+    Call<BastBean> getUserActivateInfo(@Query("imsi") String imsi);
+
 
 }
