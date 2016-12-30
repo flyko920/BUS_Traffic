@@ -89,7 +89,10 @@ public class SimActivateFragment extends BaseFragment {
             @Override
             public void onResponse(Call<BastBean> call, Response<BastBean> response) {
                 super.onResponse(call, response);
-                mSimActivateClickListener.showActivateState(response.body().getSuccess() + "");
+                if("true".equals(response.body().isSuccess() + "")){
+                    SharedPrefsUtil.putObjectValue(getActivity(),"user_info",response.body().getData().get(0));
+                }
+                mSimActivateClickListener.showActivateState(response.body().isSuccess() + "");
             }
 
             @Override
@@ -112,9 +115,8 @@ public class SimActivateFragment extends BaseFragment {
             case R.id.sim_activate_buttom_left:
 //                activityMain.addView(WebViewUtils.getWebViewInstance(getActivity(), ApiComfig.URL_TEST_HTTP));
                 //                        mSimActivateClickListener.showActivateState(response.body().getSuccess()+"");
-
-//                NetApi.getUserActivateInfo(getUserInfoCallBack,SimInfoUtils.getSimSerialNumber(getActivity()));
-                NetApi.getUserActivateInfo(getUserInfoCallBack,"123");
+                NetApi.getUserActivateInfo(getUserInfoCallBack,SimInfoUtils.getSimSerialNumber(getActivity()));
+//                NetApi.getUserActivateInfo(getUserInfoCallBack,"3232232");
                 break;
             case R.id.sim_activate_buttom_right:
                 mSimActivateClickListener.showSucceedFragment();

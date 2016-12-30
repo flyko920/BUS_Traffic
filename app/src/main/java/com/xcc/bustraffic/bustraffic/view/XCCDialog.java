@@ -23,7 +23,7 @@ public class XCCDialog {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss(); //关闭dialog
-                Toast.makeText(mActivity, R.string.main_sim_activate_recharge + which, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mActivity, R.string.main_sim_activate_recharge + which, Toast.LENGTH_SHORT).show();
                 mSimActivateClickListener.setUpdataRechargeUi(button,mImageView);
             }
         });
@@ -31,7 +31,7 @@ public class XCCDialog {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                Toast.makeText(mActivity, R.string.main_activate_false + which, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mActivity, R.string.main_activate_false + which, Toast.LENGTH_SHORT).show();
                 mActivity.onBackPressed();
             }
         });
