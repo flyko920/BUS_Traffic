@@ -20,6 +20,7 @@ import com.xcc.bustraffic.bustraffic.comfig.ApiComfig;
 import com.xcc.bustraffic.bustraffic.service.PollingActivateStateService;
 import com.xcc.bustraffic.bustraffic.ui.fragment.ActivateFailureFragment;
 import com.xcc.bustraffic.bustraffic.ui.fragment.ActivateSucceedFragment;
+import com.xcc.bustraffic.bustraffic.ui.fragment.BuyFragment;
 import com.xcc.bustraffic.bustraffic.ui.fragment.SimActivateFragment;
 import com.xcc.bustraffic.library.utils.SharedPrefsUtil;
 import com.xcc.bustraffic.library.utils.SimInfoUtils;
@@ -39,6 +40,7 @@ public class MainActivity extends BaseActivity {
     private ActivateStateServiceConnection mActivateStateServiceConnection;
     private PollingActivateStateService.ActivateStateServiceBinder mActivateStateServiceBinder;
     private ActivateStateReceiver mActivateStateReceiver;
+    private BuyFragment mBuyFragment;
 
     private class ActivateStateReceiver extends BroadcastReceiver {
         @Override
@@ -68,6 +70,7 @@ public class MainActivity extends BaseActivity {
     public void initListener() {
         mActivateFailureFragment = new ActivateFailureFragment();
         mSimActivateFragment = new SimActivateFragment();
+        mBuyFragment = new BuyFragment();
         mActivateSucceedFragment = new ActivateSucceedFragment().setSimState(ActivateSucceedFragment.ACTIVATE_SUCCEED);
         mActivateFailureFragment.setmActivateFailureListener(new ActivateFailureFragment.ActivateFailureListener() {
             @Override
@@ -139,14 +142,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        initActiviateState();
-
-//        if (activated) {
-//            showWebView();
-//        } else {
-//
-//        }
-
+        initActivateState();
         if (!activated) {
             Intent service = new Intent(this, PollingActivateStateService.class);
             mActivateStateServiceConnection = new ActivateStateServiceConnection();
@@ -163,7 +159,7 @@ public class MainActivity extends BaseActivity {
         root.addView(WebViewUtils.getWebViewInstance(this, ApiComfig.URL_TEST_HTTP));
     }
 
-    private void initActiviateState() {
+    private void initActivateState() {
         activated = SharedPrefsUtil.getValue(MainActivity.this, "activated", false);
     }
 

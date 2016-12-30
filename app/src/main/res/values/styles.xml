@@ -8,6 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--二维码图片基础样式-->
+    <style name="xcc_rq_card_base">
+        <item name="android:layout_width">@dimen/px_339</item>
+        <item name="android:layout_height">@dimen/px_339</item>
+    </style>
+
     <!--字体基础样式-->
     <style name="xcc_fonts_base">
         <item name="android:layout_width">match_parent</item>

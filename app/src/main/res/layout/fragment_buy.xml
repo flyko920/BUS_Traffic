@@ -8,7 +8,7 @@
     tools:context="com.xcc.bustraffic.bustraffic.ui.activity.MainActivity">
 
     <TextView
-        android:text="@string/main_activate_card"
+        android:text="@string/buy_title"
         style="@style/xcc_fonts_title"
         android:id="@+id/sim_activate_titile"
         android:layout_alignParentTop="true"
@@ -16,7 +16,7 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:text="@string/main_activate_member"
+        android:text="@string/buy_sub_title"
         style="@style/xcc_fonts_subtitle"
         android:id="@+id/sim_activate_subtitile"
         android:layout_below="@+id/sim_activate_titile"
@@ -30,25 +30,5 @@
         android:id="@+id/sim_activate_imageview"
         android:layout_below="@+id/sim_activate_subtitile"
         android:layout_centerHorizontal="true" />
-
-
-    <TextView
-        style="@style/xcc_buttom_focus"
-        android:text="@string/main_activate_over"
-        android:id="@+id/sim_activate_buttom_left"
-        android:layout_below="@+id/sim_activate_imageview"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="@dimen/px_240"
-        android:layout_marginTop="@dimen/px_50" />
-
-    <TextView
-        android:text="@string/main_activate_false"
-        style="@style/xcc_buttom_common"
-        android:id="@+id/sim_activate_buttom_right"
-        android:layout_below="@+id/sim_activate_imageview"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/px_240"
-        android:layout_marginTop="@dimen/px_50"/>
-
 
 </RelativeLayout>
