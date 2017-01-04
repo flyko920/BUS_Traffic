@@ -22,6 +22,7 @@ public class ActivateStateRunable implements Runnable {
 
     private final Context mContext;
     private boolean isActivateSucceed;
+    public final String TAG = this.getClass().getSimpleName();
 
     public ActivateStateRunable(Context mContext) {
         this.mContext = mContext;
@@ -29,8 +30,9 @@ public class ActivateStateRunable implements Runnable {
 
     @Override
     public void run() {
+        L.i(TAG,"run...............");
         while (!isActivateSucceed) {
-            L.e("2222","轮询开始了··············");
+            L.i("2222","轮询开始了··············");
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
@@ -41,6 +43,7 @@ public class ActivateStateRunable implements Runnable {
     }
 
     private void getSimActivateSatae() {
+        L.i(TAG,"getSimActivateSatae...............");
         NetApi.getUserActivateInfo(new BastCallBack<BastBean>(null) {
             @Override
             public void onResponse(Call<BastBean> call, Response<BastBean> response) {

@@ -13,6 +13,7 @@ import com.xcc.bustraffic.bustraffic.R;
 import com.xcc.bustraffic.bustraffic.ui.UIInterface;
 import com.xcc.bustraffic.bustraffic.ui.fragment.BaseFragment;
 import com.xcc.bustraffic.library.utils.ClickHelperUtils;
+import com.xcc.bustraffic.library.utils.L;
 
 import butterknife.ButterKnife;
 
@@ -23,6 +24,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     public Context mContext;
     FragmentManager mSupportFragmentManager;
     FragmentTransaction mFragmentTransaction;
+    public final String TAG = this.getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +37,11 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         initData();
         regCommonBtn();
         mContext = this;
-
+        L.i(TAG,"onCreate...............");
     }
 
     public void showFragment(BaseFragment mFragment,int rootid){
+        L.i(TAG,"showFragment...............");
         mSupportFragmentManager.
                 beginTransaction().
                 replace(rootid, mFragment, mFragment.getClass().getSimpleName()).
@@ -48,6 +51,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
 
     public void onResume() {
         super.onResume();
+        L.i(TAG,"onResume...............");
         MobclickAgent.onResume(this);   //统计时长
         if (mFragmentTransaction != null) {
             mFragmentTransaction.commit();
@@ -55,6 +59,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     }
 
     public void onPause() {
+        L.i(TAG,"onPause...............");
         super.onPause();
         MobclickAgent.onPause(this);
     }
@@ -63,6 +68,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
      * 在多个界面间都存在的按钮，点击事件已经由Base处理，那么将点击事件注册也统一处理掉
      */
     private void regCommonBtn() {
+        L.i(TAG,"regCommonBtn...............");
         View view = findViewById(R.id.back);
         if (view != null) {
             view.setOnClickListener(this);
@@ -73,6 +79,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
      * 推出当前APP
      */
     public void exit() {
+        L.i(TAG,"exit...............");
         MobclickAgent.onKillProcess(mContext);
         android.os.Process.killProcess(android.os.Process.myPid());  //获取PID
         System.exit(0);   //常规java、c#的标准退出法，返回值为0代表正常退出
@@ -80,6 +87,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
+        L.i(TAG,"onClick...............");
         //避免快速点击事件
         if (ClickHelperUtils.isFastClick()) {
             return;
@@ -112,6 +120,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     @Override
     public void onDestroy() {
         super.onDestroy();
+        L.i(TAG,"onDestroy...............");
         ButterKnife.unbind(this);
     }
 }

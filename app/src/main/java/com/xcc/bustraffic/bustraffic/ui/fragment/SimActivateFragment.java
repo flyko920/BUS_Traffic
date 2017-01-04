@@ -5,27 +5,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.xcc.bustraffic.bustraffic.R;
 import com.xcc.bustraffic.bustraffic.api.NetApi;
-import com.xcc.bustraffic.bustraffic.api.callback.BastBeanCallBack;
 import com.xcc.bustraffic.bustraffic.api.callback.BastCallBack;
 import com.xcc.bustraffic.bustraffic.bean.BastBean;
-import com.xcc.bustraffic.bustraffic.bean.Data;
 import com.xcc.bustraffic.bustraffic.comfig.ApiComfig;
-import com.xcc.bustraffic.bustraffic.ui.activity.BaseActivity;
 import com.xcc.bustraffic.bustraffic.view.XCCDialog;
-import com.xcc.bustraffic.library.utils.L;
 import com.xcc.bustraffic.library.utils.SharedPrefsUtil;
 import com.xcc.bustraffic.library.utils.SimInfoUtils;
-import com.xcc.bustraffic.library.utils.WebViewUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
@@ -79,11 +71,7 @@ public class SimActivateFragment extends BaseFragment {
 
     @Override
     public void initData() {
-//        shwoQRcode(sim_activate_imageview, ApiComfig.URL_TEST_HTTP);
-        shwoQRcode(sim_activate_imageview, ApiComfig.URL_ACTIVATE+
-                "imsi="+ SimInfoUtils.getSimSerialNumber(getActivity())+
-                "&imei="+SimInfoUtils.getDeviceId(getActivity()));
-//        SharedPrefsUtil.putObjectValue(getActivity(),"test",new BastBean(true,"0001","测试错误详细",null));
+        shwoQRcode(sim_activate_imageview, ApiComfig.URL_ACTIVATE+"imsi="+ SimInfoUtils.getSimSerialNumber(getActivity())+"&imei="+SimInfoUtils.getDeviceId(getActivity()));
         setUMFragmentTag("SimActivateFragment");
         getUserInfoCallBack = new BastCallBack<BastBean>(null) {
             @Override
@@ -109,19 +97,13 @@ public class SimActivateFragment extends BaseFragment {
         }
         switch (v.getId()) {
             case R.id.sim_activate_imageview:
-//                toast(((BastBean)SharedPrefsUtil.getObjectValue(getActivity(),"test","获取数据失败",BastBean.class)).getErrorCode());
                 mSimActivateClickListener.setQRCodeClick();
                 break;
             case R.id.sim_activate_buttom_left:
-//                activityMain.addView(WebViewUtils.getWebViewInstance(getActivity(), ApiComfig.URL_TEST_HTTP));
-                //                        mSimActivateClickListener.showActivateState(response.body().getSuccess()+"");
                 NetApi.getUserActivateInfo(getUserInfoCallBack,SimInfoUtils.getSimSerialNumber(getActivity()));
-//                NetApi.getUserActivateInfo(getUserInfoCallBack,"3232232");
                 break;
             case R.id.sim_activate_buttom_right:
                 mSimActivateClickListener.showSucceedFragment();
-//                ((BaseActivity)getActivity()).exit();
-//                getActivity().onBackPressed();
                 break;
         }
     }

@@ -16,17 +16,19 @@ import retrofit2.Response;
 public class BastCallBack<T> implements Callback<T> {
     private ProgressBar progressBar;
     public String errmsg = "";
+    public final String TAG = this.getClass().getSimpleName();
 
     public BastCallBack(ProgressBar progressBar) {
         this.progressBar = progressBar;
     }
     @Override
     public void onResponse(Call<T> call, Response<T> response) {
-
+        L.i(TAG,"onResponse == " + response.body().toString());
     }
 
     @Override
     public void onFailure(Call<T> call, Throwable t) {
+        L.i(TAG,"onFailure 。。。。。。。" );
         if(progressBar != null){
             progressBar.setVisibility(View.INVISIBLE);
         }

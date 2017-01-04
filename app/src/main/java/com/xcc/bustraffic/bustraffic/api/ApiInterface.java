@@ -21,5 +21,8 @@ public interface ApiInterface {
     @GET("/bus/services/api/user/getUserInfo")
     Call<BastBean> getUserActivateInfo(@Query("imsi") String imsi);
 
+    @GET("/bus/services/api/user/getUserInfo")
+    Call<BastBean> getAutoUpdataApk(@Query("imsi") int imsi);
+
 
 }

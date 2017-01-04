@@ -22,4 +22,9 @@ public class NetApi {
         mCall.enqueue(callback);
     }
 
+    public static void getAutoUpdataApk(Callback callback,int version_code){
+        Call<BastBean> mCall = mApiHelper.getAutoUpdataApk(version_code);
+        mCall.enqueue(callback);
+    }
+
 }

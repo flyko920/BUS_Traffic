@@ -17,7 +17,7 @@ public class BastBeanCallBack extends BastCallBack<BastBean> {
     private final ProgressBar mProgressBar;
 
     /**
-     * 可以通过参数把UI的VIEW传到Callback中进行处理
+     * 可以通过参数把UI的VIEW注入到Callback中进行处理
      * @param progressBar
      */
     public BastBeanCallBack(ProgressBar progressBar) {
@@ -31,7 +31,6 @@ public class BastBeanCallBack extends BastCallBack<BastBean> {
         if(mProgressBar != null){
             mProgressBar.setVisibility(View.INVISIBLE);
         }
-        L.e("2222","country:" + response.body().toString());
     }
 
 
