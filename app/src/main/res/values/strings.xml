@@ -14,7 +14,8 @@
     <string name="main_activate_member">微信扫一扫二维码，成为aicar会员</string>
     <string name="main_activate_over">已完成激活</string>
     <string name="main_activate_false">暂不需要</string>
-    <string name="main_sim_activate_title">你的小车车还有10天到期，后期后将无法享受上网服务，请及时充值哦！</string>
+    <string name="main_sim_activate_title_1">你的小车车还有</string>
+    <string name="main_sim_activate_title_2">天到期，后期后将无法享受上网服务，请及时充值哦！</string>
     <string name="main_sim_activate_recharge">充值</string>
     <string name="main_sim_activate_recharge_over">已充值</string>
     <string name="activate_succeed_titile">恭喜你激活成功</string>
@@ -30,5 +31,7 @@
     <string name="activity_member_left_setting">设置</string>
     <string name="buy_title">您的流量已用完</string>
     <string name="buy_sub_title">微信扫一扫，购买小车车会员流量套餐</string>
+    <string name="fragment_buy_1">您的aicar流量还有</string>
+    <string name="fragment_buy_2">天到期，请充值！</string>
 
 </resources>

@@ -16,9 +16,10 @@ import com.xcc.bustraffic.bustraffic.ui.fragment.SimActivateFragment;
 
 public class XCCDialog {
 
-    public static void showDialog(final Activity mActivity, final SimActivateFragment.SimActivateClickListener mSimActivateClickListener, final TextView button, final ImageView mImageView){
+    public static void showDialog(final Activity mActivity, final SimActivateFragment.SimActivateClickListener mSimActivateClickListener,
+                                  final TextView button, final ImageView mImageView,String packageDay){
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);  //先得到构造器
-        builder.setMessage(R.string.main_sim_activate_title); //设置内容
+        builder.setMessage(mActivity.getString(R.string.main_sim_activate_title_1) + packageDay + mActivity.getString(R.string.main_sim_activate_title_2 )); //设置内容
         builder.setPositiveButton(R.string.main_sim_activate_recharge, new DialogInterface.OnClickListener() { //设置确定按钮
             @Override
             public void onClick(DialogInterface dialog, int which) {

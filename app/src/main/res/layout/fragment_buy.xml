@@ -25,10 +25,17 @@
 
     <ImageView
         style="@style/xcc_rq_card_base"
-        android:src="@drawable/webwxgetmsgimg"
         android:layout_marginTop="@dimen/px_10"
-        android:id="@+id/sim_activate_imageview"
+        android:id="@+id/buy_imageview"
         android:layout_below="@+id/sim_activate_subtitile"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="@string/main_sim_activate_recharge_over"
+        style="@style/xcc_buttom_focus"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/px_50"
+        android:id="@+id/buy_button" />
 
 </RelativeLayout>

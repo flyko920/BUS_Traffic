@@ -12,6 +12,7 @@ import com.xcc.bustraffic.bustraffic.api.callback.BastCallBack;
 import com.xcc.bustraffic.bustraffic.bean.BastBean;
 import com.xcc.bustraffic.bustraffic.comfig.ApiComfig;
 import com.xcc.bustraffic.bustraffic.view.XCCDialog;
+import com.xcc.bustraffic.library.utils.L;
 import com.xcc.bustraffic.library.utils.SharedPrefsUtil;
 import com.xcc.bustraffic.library.utils.SimInfoUtils;
 
@@ -44,8 +45,6 @@ public class SimActivateFragment extends BaseFragment {
     }
 
     public interface SimActivateClickListener {
-        void setQRCodeClick();
-
         void setUpdataRechargeUi(TextView mButton,ImageView mImageView);
 
         void showSucceedFragment();
@@ -77,6 +76,7 @@ public class SimActivateFragment extends BaseFragment {
             @Override
             public void onResponse(Call<BastBean> call, Response<BastBean> response) {
                 super.onResponse(call, response);
+                L.i("2222",response.body().toString());
                 if("true".equals(response.body().isSuccess() + "")){
                     SharedPrefsUtil.putObjectValue(getActivity(),"user_info",response.body().getData().get(0));
                 }
@@ -97,7 +97,7 @@ public class SimActivateFragment extends BaseFragment {
         }
         switch (v.getId()) {
             case R.id.sim_activate_imageview:
-                mSimActivateClickListener.setQRCodeClick();
+
                 break;
             case R.id.sim_activate_buttom_left:
                 NetApi.getUserActivateInfo(getUserInfoCallBack,SimInfoUtils.getSimSerialNumber(getActivity()));
@@ -108,11 +108,11 @@ public class SimActivateFragment extends BaseFragment {
         }
     }
 
-    public void showDialog(final Activity activity) {
+    public void showDialog(final Activity activity,String packageDay) {
         if (mSimActivateClickListener == null) {
             return;
         }
-        XCCDialog.showDialog(activity, mSimActivateClickListener, sim_activate_buttom_left,sim_activate_imageview);
+        XCCDialog.showDialog(activity, mSimActivateClickListener, sim_activate_buttom_left,sim_activate_imageview,packageDay);
     }
 
 

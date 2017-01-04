@@ -19,8 +19,8 @@ import com.umeng.analytics.MobclickAgent;
 import com.xcc.bustraffic.bustraffic.R;
 import com.xcc.bustraffic.bustraffic.api.NetApi;
 import com.xcc.bustraffic.bustraffic.api.callback.BastBeanCallBack;
+import com.xcc.bustraffic.bustraffic.api.callback.BastCallBack;
 import com.xcc.bustraffic.bustraffic.bean.BastBean;
-import com.xcc.bustraffic.bustraffic.bean.Data;
 import com.xcc.bustraffic.bustraffic.comfig.ApiComfig;
 import com.xcc.bustraffic.bustraffic.service.PollingActivateStateService;
 import com.xcc.bustraffic.bustraffic.ui.fragment.ActivateFailureFragment;
@@ -31,7 +31,6 @@ import com.xcc.bustraffic.library.utils.L;
 import com.xcc.bustraffic.library.utils.SharedPrefsUtil;
 import com.xcc.bustraffic.library.utils.SimInfoUtils;
 import com.xcc.bustraffic.library.utils.WebViewUtils;
-import com.xcc.bustraffic.library.utils.ZXingUtils;
 
 import butterknife.Bind;
 import retrofit2.Call;
@@ -49,6 +48,7 @@ public class MainActivity extends BaseActivity {
     private PollingActivateStateService.ActivateStateServiceBinder mActivateStateServiceBinder;
     private ActivateStateReceiver mActivateStateReceiver;
     private BuyFragment mBuyFragment;
+    private String packageDay;
 
     private class ActivateStateReceiver extends BroadcastReceiver {
         @Override
@@ -63,7 +63,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public int getLayoutId() {
         L.i(TAG,"getLayoutId...............");
-        MobclickAgent.openActivityDurationTrack(false); //禁止默认的页面统计方式，这样将不会再自动统计Activity
+        MobclickAgent.openActivityDurationTrack(false);                         //禁止默认的页面统计方式，这样将不会再自动统计Activity
         return R.layout.activity_main;
     }
 
@@ -83,6 +83,12 @@ public class MainActivity extends BaseActivity {
         mActivateFailureFragment = new ActivateFailureFragment();
         mSimActivateFragment = new SimActivateFragment();
         mBuyFragment = new BuyFragment();
+        mBuyFragment.setBuyFragmentListener(new BuyFragment.BuyFragmentListener() {
+            @Override
+            public void okOnClick() {
+                initActivateState();
+            }
+        });
         mActivateSucceedFragment = new ActivateSucceedFragment().setSimState(ActivateSucceedFragment.ACTIVATE_SUCCEED);
         mActivateFailureFragment.setmActivateFailureListener(new ActivateFailureFragment.ActivateFailureListener() {
             @Override
@@ -118,29 +124,11 @@ public class MainActivity extends BaseActivity {
                     MainActivity.this.showFragment(mActivateSucceedFragment, R.id.root);
                 }
             }
-
-            @Override
-            public void setQRCodeClick() {
-                L.i(TAG,"setQRCodeClick...............");
-                mSimActivateFragment.showDialog(MainActivity.this);
-            }
-
             @Override
             public void setUpdataRechargeUi(TextView mButton, ImageView mImageView) {
                 L.i(TAG,"setUpdataRechargeUi...............");
-                mButton.setText(R.string.main_sim_activate_recharge_over);
-                Data data = (Data) SharedPrefsUtil.getObjectValue(MainActivity.this, "user_info", null, Data.class);
-                if (null != data) {
-                    userPhone = data.getUserPhone();
-                }
-                mImageView.setImageBitmap(ZXingUtils.createQRImage(ApiComfig.URL_PAY +
-                                "phone=" + ("0".equals(userPhone) || userPhone == null ? "" : userPhone) +  //梦思要求，当没有手机号码或者ismi号码时，给空
-                                "imsi=" + SimInfoUtils.getSimLine1Number(MainActivity.this),
-                        mImageView.getWidth(), mImageView.getHeight()));
-                        L.i("2222",ApiComfig.URL_PAY +
-                                "phone=" + ("0".equals(userPhone) || userPhone == null ? "" : userPhone) +
-                                "imsi=" + SimInfoUtils.getSimLine1Number(MainActivity.this));
-
+                mBuyFragment.setTitle(packageDay);
+                showFragment(mBuyFragment,R.id.root);
             }
 
             @Override
@@ -161,20 +149,11 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initData() {
         L.i(TAG,"initData...............");
-        initActivateState();
-        inspectVersionCode();
-        if (!activated) {
-            Intent service = new Intent(this, PollingActivateStateService.class);
-            mActivateStateServiceConnection = new ActivateStateServiceConnection();
-            bindService(service, mActivateStateServiceConnection, Service.BIND_AUTO_CREATE);
-            startService(service);
-            showSimActivateFragment();
-        } else {
-//            mFragmentTransaction.add(R.id.root, mSimActivateFragment, "mSimActivateFragment");
-            showWebView();
-        }
+        initActivateState();  //获取激活状态
+        inspectVersionCode();   //检查版本更新
     }
 
+    //检查版本更新
     private void inspectVersionCode() {
         L.i(TAG,"inspectVersionCode...............");
         PackageInfo mPackageInfo = null;
@@ -205,12 +184,37 @@ public class MainActivity extends BaseActivity {
 
     private void showWebView() {
         L.i(TAG,"showWebView...............");
-        root.addView(WebViewUtils.getWebViewInstance(this, ApiComfig.URL_TEST_HTTP));
+        root.addView(WebViewUtils.getWebViewInstance(this, ApiComfig.URL_MEMBER));
     }
 
+    //初始化激活状态
     private void initActivateState() {
         L.i(TAG,"initActivateState...............");
-        activated = SharedPrefsUtil.getValue(MainActivity.this, "activated", false);
+        NetApi.getUserActivateInfo(new BastCallBack<BastBean>(null){
+            @Override
+            public void onResponse(Call<BastBean> call, Response<BastBean> response) {
+                super.onResponse(call, response);
+                L.i("2222",response.body().toString());
+                packageDay = response.body().getData().get(0).getPackageDay();
+                if("true".equals(response.body().isSuccess() + "")){                                                            // SIM卡已经激活成功
+                    activated = SharedPrefsUtil.getValue(MainActivity.this, "activated", false);
+                    SharedPrefsUtil.putObjectValue(MainActivity.this,"user_info",response.body().getData().get(0));
+                    if(0>ApiComfig.PACKAGE_DAY.compareTo(packageDay)){                                                          //小于设定值，显示提醒用户当前剩余天数
+                        mSimActivateFragment.showDialog(MainActivity.this,packageDay);
+                    }else if ("0".equals(packageDay)){                                                                          // 小于0天，服务到期，提示充值页面
+                        showFragment(mBuyFragment,R.id.root);                                                                   //提示充值页面
+                    }else {
+                        showWebView();                                                                                           // 显示会员H5页面
+                    }
+                } else {                                                                                                         // SIM卡未激活,显示SIM卡激活页面，并开启轮询服务
+                    Intent service = new Intent(MainActivity.this, PollingActivateStateService.class);
+                    mActivateStateServiceConnection = new ActivateStateServiceConnection();
+                    bindService(service, mActivateStateServiceConnection, Service.BIND_AUTO_CREATE);
+                    startService(service);                                                                                          //开启轮询服务
+                    showSimActivateFragment();                                                                                      //显示SIM卡激活页面
+                }
+            }
+        },SimInfoUtils.getSimSerialNumber(this));
     }
 
     @Override
@@ -235,7 +239,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (!activated) {
+        if (!activated && mActivateStateServiceConnection!=null) {
             unbindService(mActivateStateServiceConnection);
         }
         unregisterReceiver(mActivateStateReceiver);
