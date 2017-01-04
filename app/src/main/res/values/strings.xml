@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BUSTraffic</string>
+    <string name="app_name">aicar</string>
 
 
     <!--错误码列表-->
@@ -33,5 +33,6 @@
     <string name="buy_sub_title">微信扫一扫，购买小车车会员流量套餐</string>
     <string name="fragment_buy_1">您的aicar流量还有</string>
     <string name="fragment_buy_2">天到期，请充值！</string>
+    <string name="dialog_forced_updata_msg">有新的功能需要升级呦，一会安装就可以继续使用了！</string>
 
 </resources>

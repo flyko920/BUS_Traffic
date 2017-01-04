@@ -4,10 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.xcc.bustraffic.bustraffic.R;
-import com.xcc.bustraffic.bustraffic.bean.Data;
-import com.xcc.bustraffic.library.utils.L;
 import com.xcc.bustraffic.library.utils.ResStringArrayUtils;
-import com.xcc.bustraffic.library.utils.SharedPrefsUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

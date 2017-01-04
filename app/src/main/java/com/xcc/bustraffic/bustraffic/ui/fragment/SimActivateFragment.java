@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.xcc.bustraffic.bustraffic.R;
 import com.xcc.bustraffic.bustraffic.api.NetApi;
 import com.xcc.bustraffic.bustraffic.api.callback.BastCallBack;
-import com.xcc.bustraffic.bustraffic.bean.BastBean;
+import com.xcc.bustraffic.bustraffic.bean.Result;
 import com.xcc.bustraffic.bustraffic.comfig.ApiComfig;
 import com.xcc.bustraffic.bustraffic.view.XCCDialog;
 import com.xcc.bustraffic.library.utils.L;
@@ -36,7 +36,7 @@ public class SimActivateFragment extends BaseFragment {
     TextView simActivateButtomRight;
 
     private SimActivateClickListener mSimActivateClickListener;
-    private BastCallBack<BastBean> getUserInfoCallBack;
+    private BastCallBack<Result> getUserInfoCallBack;
 
     @Override
     public void onDestroyView() {
@@ -72,9 +72,9 @@ public class SimActivateFragment extends BaseFragment {
     public void initData() {
         shwoQRcode(sim_activate_imageview, ApiComfig.URL_ACTIVATE+"imsi="+ SimInfoUtils.getSimSerialNumber(getActivity())+"&imei="+SimInfoUtils.getDeviceId(getActivity()));
         setUMFragmentTag("SimActivateFragment");
-        getUserInfoCallBack = new BastCallBack<BastBean>(null) {
+        getUserInfoCallBack = new BastCallBack<Result>(null) {
             @Override
-            public void onResponse(Call<BastBean> call, Response<BastBean> response) {
+            public void onResponse(Call<Result> call, Response<Result> response) {
                 super.onResponse(call, response);
                 L.i("2222",response.body().toString());
                 if("true".equals(response.body().isSuccess() + "")){
@@ -84,7 +84,7 @@ public class SimActivateFragment extends BaseFragment {
             }
 
             @Override
-            public void onFailure(Call<BastBean> call, Throwable t) {
+            public void onFailure(Call<Result> call, Throwable t) {
                 super.onFailure(call, t);
             }
         };

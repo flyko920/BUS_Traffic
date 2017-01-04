@@ -1,17 +1,15 @@
 package com.xcc.bustraffic.bustraffic.service;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import com.xcc.bustraffic.bustraffic.api.NetApi;
 import com.xcc.bustraffic.bustraffic.api.callback.BastCallBack;
-import com.xcc.bustraffic.bustraffic.bean.BastBean;
+import com.xcc.bustraffic.bustraffic.bean.Result;
 import com.xcc.bustraffic.library.utils.L;
 import com.xcc.bustraffic.library.utils.SharedPrefsUtil;
 import com.xcc.bustraffic.library.utils.SimInfoUtils;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
@@ -44,9 +42,9 @@ public class ActivateStateRunable implements Runnable {
 
     private void getSimActivateSatae() {
         L.i(TAG,"getSimActivateSatae...............");
-        NetApi.getUserActivateInfo(new BastCallBack<BastBean>(null) {
+        NetApi.getUserActivateInfo(new BastCallBack<Result>(null) {
             @Override
-            public void onResponse(Call<BastBean> call, Response<BastBean> response) {
+            public void onResponse(Call<Result> call, Response<Result> response) {
                 super.onResponse(call, response);
                 if ("true".equals(response.body().isSuccess() + "")) {
                     SharedPrefsUtil.putValue(mContext,"activated",isActivateSucceed);

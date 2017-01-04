@@ -1,20 +1,14 @@
 package com.xcc.bustraffic.bustraffic.ui.fragment;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xcc.bustraffic.bustraffic.R;
-import com.xcc.bustraffic.bustraffic.bean.Data;
 import com.xcc.bustraffic.bustraffic.comfig.ApiComfig;
-import com.xcc.bustraffic.library.utils.SharedPrefsUtil;
 import com.xcc.bustraffic.library.utils.SimInfoUtils;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by flykozhang on 2016/12/30.
@@ -63,13 +57,14 @@ public class BuyFragment extends BaseFragment {
 
     /*显示充值二维码*/
     private void showBuyQrcode() {
-        Data data = (Data) SharedPrefsUtil.getObjectValue(getActivity(), "user_info", "", Data.class);
-        String userPhone = null;
-        if (data != null) {
-            userPhone = data.getUserPhone();
-        }
-        shwoQRcode(buyImageview, ApiComfig.URL_PAY + "phone=" +
-                (userPhone == null ? "" : userPhone) + "imsi=" + SimInfoUtils.getSimSerialNumber(getActivity()));  //梦思要求，当没有手机号码或者ismi号码时，给空
+//        Data data = (Data) SharedPrefsUtil.getObjectValue(getActivity(), "user_info", "", Data.class);
+//        String userPhone = null;
+//        if (data != null) {
+//            userPhone = data.getUserPhone();
+//        }
+//        shwoQRcode(buyImageview, ApiComfig.URL_PAY + "phone=" +
+//                (userPhone == null ? "" : userPhone) + "imsi=" + SimInfoUtils.getSimSerialNumber(getActivity()));  //梦思要求，当没有手机号码或者ismi号码时，给空
+        shwoQRcode(buyImageview, ApiComfig.URL_PAY + "imsi=" + SimInfoUtils.getSimSerialNumber(getActivity()));  //梦思要求，当没有手机号码或者ismi号码时，给空
     }
 
     @Override

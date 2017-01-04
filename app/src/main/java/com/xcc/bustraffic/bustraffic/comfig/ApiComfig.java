@@ -14,6 +14,8 @@ public class ApiComfig {
     public static final String URL_MEMBER = "http://www.chpjdsm.com/bus/temp/aicarHome.jsp";
     public static final String URL_PAY = "http://www.chpjdsm.com/bus/weiXinScan/topayPackage?";
     public static final String URL_ACTIVATE = "http://www.chpjdsm.com/bus/activation/toRegister?";
+//    public static final String URL_UPDATE_APK = "www.chpjdsm.com/bus/services/api/appVersion/getAppVersion?version=1";
+    public static final String URL_UPDATE_APK = "www.chpjdsm.com/bus/services/api/appVersion/getAppVersion?";
 
     /*用户流量剩余条数*/
     public static final String PACKAGE_DAY = "10";
