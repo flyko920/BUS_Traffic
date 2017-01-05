@@ -19,9 +19,6 @@ import retrofit2.Response;
 
 public class PollingActivateStateIntentService extends IntentService {
     public final String TAG = this.getClass().getSimpleName();
-//    public PollingActivateStateIntentService(String name) {
-//        super(name);
-//    }
 
     public PollingActivateStateIntentService() {
         super("PollingActivateStateIntentService");
@@ -32,9 +29,8 @@ public class PollingActivateStateIntentService extends IntentService {
         L.i(TAG, "onHandleIntent...............");
         do {
             getUserInfoSuccessOf();
-
             try {
-                Thread.sleep(5000);
+                Thread.sleep(7000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

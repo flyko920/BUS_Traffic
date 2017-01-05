@@ -73,7 +73,7 @@
             android:enabled="true"
             android:exported="true"></service>
 
-        <service android:name=".service.PollingActivateStateService" />
+        <!--<service android:name=".service.PollingActivateStateService" />-->
         <service android:name=".service.PollingActivateStateIntentService">
             <intent-filter>
                 <action android:name="com.xcc.bustraffic.bustraffic.service" />

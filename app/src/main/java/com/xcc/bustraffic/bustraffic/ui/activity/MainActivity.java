@@ -1,15 +1,11 @@
 package com.xcc.bustraffic.bustraffic.ui.activity;
 
-import android.app.Service;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.os.IBinder;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -21,7 +17,6 @@ import com.xcc.bustraffic.bustraffic.api.NetApi;
 import com.xcc.bustraffic.bustraffic.api.callback.BastCallBack;
 import com.xcc.bustraffic.bustraffic.bean.DataVO;
 import com.xcc.bustraffic.bustraffic.comfig.ApiComfig;
-import com.xcc.bustraffic.bustraffic.service.PollingActivateStateService;
 import com.xcc.bustraffic.bustraffic.ui.fragment.ActivateFailureFragment;
 import com.xcc.bustraffic.bustraffic.ui.fragment.ActivateSucceedFragment;
 import com.xcc.bustraffic.bustraffic.ui.fragment.BuyFragment;
@@ -43,10 +38,8 @@ public class MainActivity extends BaseActivity {
     RelativeLayout root;
     private SimActivateFragment mSimActivateFragment;
     private ActivateSucceedFragment mActivateSucceedFragment;
-    private boolean activated;
     private ActivateFailureFragment mActivateFailureFragment;
-//    private ActivateStateServiceConnection mActivateStateServiceConnection;
-//    private PollingActivateStateService.ActivateStateServiceBinder mActivateStateServiceBinder;
+
     private ActivateStateReceiver mActivateStateReceiver;
     private BuyFragment mBuyFragment;
     private String packageDay;
@@ -56,7 +49,6 @@ public class MainActivity extends BaseActivity {
         public void onReceive(Context context, Intent intent) {
             showFragment(mActivateSucceedFragment, R.id.root);
             L.i(TAG, "onReceive...............");
-//            unbindService(mActivateStateServiceConnection);
         }
     }
 
@@ -75,7 +67,7 @@ public class MainActivity extends BaseActivity {
             mFragmentTransaction.add(R.id.root, mActivateSucceedFragment, "mActivateSucceedFragment");
         } else {
 //            mFragmentTransaction.add(R.id.root, mSimActivateFragment, "mSimActivateFragment");
-            showFragment(mSimActivateFragment,R.id.root);
+            showFragment(mSimActivateFragment, R.id.root);
         }
     }
 
@@ -195,7 +187,7 @@ public class MainActivity extends BaseActivity {
 
     private void showWebView() {
         L.i(TAG, "showWebView...............");
-        root.addView(WebViewUtils.getWebViewInstance(this, ApiComfig.URL_MEMBER+"imsi="+SimInfoUtils.getSimSerialNumber(this)));
+        root.addView(WebViewUtils.getWebViewInstance(this, ApiComfig.URL_MEMBER + "imsi=" + SimInfoUtils.getSimSerialNumber(this)));
     }
 
     //初始化激活状态
@@ -212,14 +204,14 @@ public class MainActivity extends BaseActivity {
 
     /*根据用户信息，显示对应的页面*/
     private void showSuitablePage(Response<DataVO.UserInfoVO> response) {
-        L.i("22222", "22222222222222222222" + response.body().toString());
-        if (null!= response.body().getData()) {
+        L.i(TAG, "showSuitablePage...............");
+        L.i(TAG, response.body().toString());
+        if (null != response.body().getData()) {
             packageDay = response.body().getData().get(0).getPackageDay();
         }
         if ("true".equals(response.body().isSuccess() + "")) {                                                            // SIM卡已经激活成功
-            activated = SharedPrefsUtil.getValue(MainActivity.this, "activated", false);
             SharedPrefsUtil.putObjectValue(MainActivity.this, "user_info", response.body().getData().get(0));
-            if (0 < ApiComfig.PACKAGE_DAY.compareTo(packageDay)) {                                                        //小于设定值，显示提醒用户当前剩余天数
+            if (ApiComfig.PACKAGE_DAY > Integer.parseInt(packageDay) && Integer.parseInt(packageDay) > 0) {                                                        //小于设定值，显示提醒用户当前剩余天数
                 mSimActivateFragment.showDialog(MainActivity.this, packageDay);
             } else if ("0".equals(packageDay)) {                                                                          // 小于0天，服务到期，提示充值页面
                 showFragment(mBuyFragment, R.id.root);                                                                    //提示充值页面
@@ -227,15 +219,9 @@ public class MainActivity extends BaseActivity {
                 showWebView();                                                                                            // 显示会员H5页面
             }
         } else {                                                                                                          // SIM卡未激活,显示SIM卡激活页面，并开启轮询服务
-            //Operation 2
             Intent intent = new Intent("com.xcc.bustraffic.bustraffic.service");
-            startService(intent);
-            showFragment(mSimActivateFragment, R.id.root);
-//            Intent service = new Intent(MainActivity.this, PollingActivateStateService.class);
-//            mActivateStateServiceConnection = new ActivateStateServiceConnection();
-//            bindService(service, mActivateStateServiceConnection, Service.BIND_AUTO_CREATE);
-//            startService(service);                                                                                        //开启轮询服务
-//            showSimActivateFragment();                                                                                    //显示SIM卡激活页面
+            startService(intent);                                                                                         //开启轮询服务
+            showSimActivateFragment();                                                                                    //显示SIM卡激活页面
         }
     }
 
@@ -243,26 +229,10 @@ public class MainActivity extends BaseActivity {
     public void processClick(View v) {
 
     }
-//
-//    private class ActivateStateServiceConnection implements ServiceConnection {
-//        @Override
-//        public void onServiceConnected(ComponentName name, IBinder service) {
-//            L.i(TAG, "onServiceConnected...............");
-//            mActivateStateServiceBinder = (PollingActivateStateService.ActivateStateServiceBinder) service;
-//        }
-//
-//        @Override
-//        public void onServiceDisconnected(ComponentName name) {
-//            L.i(TAG, "onServiceDisconnected...............");
-//        }
-//    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        if (!activated && mActivateStateServiceConnection != null) {
-//            unbindService(mActivateStateServiceConnection);
-//        }
         unregisterReceiver(mActivateStateReceiver);
     }
 }
