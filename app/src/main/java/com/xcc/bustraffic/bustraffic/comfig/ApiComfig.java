@@ -12,10 +12,9 @@ public class ApiComfig {
 //    public static final String URL_TEST_HTTP = "http://192.168.0.101:8080/bus/activation/temp";
 //    public static final String URL_TEST_HTTP = "http://192.168.0.101:8080/bus/temp/aicarHome.jsp";
 //    public static final String URL_MEMBER = "http://www.chpjdsm.com/bus/temp/aicarHome.jsp";
-    public static final String URL_MEMBER = "http://192.168.0.101:8080/bus/appH5/aicarHome?";
+    public static final String URL_MEMBER = "http://www.chpjdsm.com/bus/appH5/aicarHome?";
     public static final String URL_PAY = "http://www.chpjdsm.com/bus/weiXinScan/topayPackage?";
     public static final String URL_ACTIVATE = "http://www.chpjdsm.com/bus/activation/toRegister?";
-    public static final String URL_UPDATE_APK = "www.chpjdsm.com/bus/services/api/appVersion/getAppVersion?";
 
     /*用户流量剩余条数*/
     public static final int PACKAGE_DAY = 10;

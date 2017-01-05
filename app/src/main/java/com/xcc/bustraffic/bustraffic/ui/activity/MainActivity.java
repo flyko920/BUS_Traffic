@@ -64,7 +64,8 @@ public class MainActivity extends BaseActivity {
         L.i(TAG, "showSimActivateFragment...............");
         if (SimInfoUtils.getSimSerialNumber(this) == null) {
             mActivateSucceedFragment.setSimState(ActivateSucceedFragment.SIM_ERROR);
-            mFragmentTransaction.add(R.id.root, mActivateSucceedFragment, "mActivateSucceedFragment");
+//            mFragmentTransaction.add(R.id.root, mActivateSucceedFragment, "mActivateSucceedFragment");
+            showFragment(mActivateSucceedFragment, R.id.root);
         } else {
 //            mFragmentTransaction.add(R.id.root, mSimActivateFragment, "mSimActivateFragment");
             showFragment(mSimActivateFragment, R.id.root);
@@ -182,7 +183,6 @@ public class MainActivity extends BaseActivity {
 
                 break;
         }
-
     }
 
     private void showWebView() {
@@ -211,7 +211,8 @@ public class MainActivity extends BaseActivity {
         }
         if ("true".equals(response.body().isSuccess() + "")) {                                                            // SIM卡已经激活成功
             SharedPrefsUtil.putObjectValue(MainActivity.this, "user_info", response.body().getData().get(0));
-            if (ApiComfig.PACKAGE_DAY > Integer.parseInt(packageDay) && Integer.parseInt(packageDay) > 0) {                                                        //小于设定值，显示提醒用户当前剩余天数
+            if (ApiComfig.PACKAGE_DAY > Integer.parseInt(packageDay) && Integer.parseInt(packageDay) > 0) {               //小于设定值，显示提醒用户当前剩余天数
+                showWebView();
                 mSimActivateFragment.showDialog(MainActivity.this, packageDay);
             } else if ("0".equals(packageDay)) {                                                                          // 小于0天，服务到期，提示充值页面
                 showFragment(mBuyFragment, R.id.root);                                                                    //提示充值页面

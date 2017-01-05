@@ -53,9 +53,9 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         super.onResume();
         L.i(TAG,"onResume...............");
         MobclickAgent.onResume(this);   //统计时长
-        if (mFragmentTransaction != null) {
-            mFragmentTransaction.commit();
-        }
+//        if (mFragmentTransaction != null) {
+//            mFragmentTransaction.commit();
+//        }
     }
 
     public void onPause() {
