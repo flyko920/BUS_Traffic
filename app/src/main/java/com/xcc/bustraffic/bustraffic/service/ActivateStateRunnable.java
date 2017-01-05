@@ -16,13 +16,13 @@ import retrofit2.Response;
  * Created by flykozhang on 2016/12/29.
  */
 
-public class ActivateStateRunable implements Runnable {
+public class ActivateStateRunnable implements Runnable {
 
     private final Context mContext;
     private boolean isActivateSucceed;
     public final String TAG = this.getClass().getSimpleName();
 
-    public ActivateStateRunable(Context mContext) {
+    public ActivateStateRunnable(Context mContext) {
         this.mContext = mContext;
     }
 
@@ -36,12 +36,12 @@ public class ActivateStateRunable implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            getSimActivateSatae();
+            getSimActivateSate();
         }
     }
 
-    private void getSimActivateSatae() {
-        L.i(TAG,"getSimActivateSatae...............");
+    private void getSimActivateSate() {
+        L.i(TAG,"getSimActivateSate...............");
         NetApi.getUserActivateInfo(new BastCallBack<Result>(null) {
             @Override
             public void onResponse(Call<Result> call, Response<Result> response) {

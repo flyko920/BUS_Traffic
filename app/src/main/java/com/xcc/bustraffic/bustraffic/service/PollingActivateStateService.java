@@ -34,7 +34,7 @@ public class PollingActivateStateService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         L.i(TAG, "onStartCommand...............");
-        mThread = new Thread(new ActivateStateRunable(this));
+        mThread = new Thread(new ActivateStateRunnable(this));
         mThread.start();
         // 告知界面更新
         updataUiThread = new Thread(new UpdataUiRunnable(this));

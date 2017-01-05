@@ -77,6 +77,7 @@
         </service>
 
         <service android:name=".service.PollingActivateStateService"/>
+        <service android:name=".service.PollingActivateStateIntentService"/>
 
 
         <receiver android:name=".receivers.ApkInstallReceiver">
@@ -84,6 +85,7 @@
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>
