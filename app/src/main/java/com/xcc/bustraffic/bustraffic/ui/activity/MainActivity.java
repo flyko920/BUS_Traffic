@@ -45,8 +45,8 @@ public class MainActivity extends BaseActivity {
     private ActivateSucceedFragment mActivateSucceedFragment;
     private boolean activated;
     private ActivateFailureFragment mActivateFailureFragment;
-    private ActivateStateServiceConnection mActivateStateServiceConnection;
-    private PollingActivateStateService.ActivateStateServiceBinder mActivateStateServiceBinder;
+//    private ActivateStateServiceConnection mActivateStateServiceConnection;
+//    private PollingActivateStateService.ActivateStateServiceBinder mActivateStateServiceBinder;
     private ActivateStateReceiver mActivateStateReceiver;
     private BuyFragment mBuyFragment;
     private String packageDay;
@@ -227,11 +227,15 @@ public class MainActivity extends BaseActivity {
                 showWebView();                                                                                            // 显示会员H5页面
             }
         } else {                                                                                                          // SIM卡未激活,显示SIM卡激活页面，并开启轮询服务
-            Intent service = new Intent(MainActivity.this, PollingActivateStateService.class);
-            mActivateStateServiceConnection = new ActivateStateServiceConnection();
-            bindService(service, mActivateStateServiceConnection, Service.BIND_AUTO_CREATE);
-            startService(service);                                                                                        //开启轮询服务
-            showSimActivateFragment();                                                                                    //显示SIM卡激活页面
+            //Operation 2
+            Intent intent = new Intent("com.xcc.bustraffic.bustraffic.service");
+            startService(intent);
+            showFragment(mSimActivateFragment, R.id.root);
+//            Intent service = new Intent(MainActivity.this, PollingActivateStateService.class);
+//            mActivateStateServiceConnection = new ActivateStateServiceConnection();
+//            bindService(service, mActivateStateServiceConnection, Service.BIND_AUTO_CREATE);
+//            startService(service);                                                                                        //开启轮询服务
+//            showSimActivateFragment();                                                                                    //显示SIM卡激活页面
         }
     }
 
@@ -239,26 +243,26 @@ public class MainActivity extends BaseActivity {
     public void processClick(View v) {
 
     }
-
-    private class ActivateStateServiceConnection implements ServiceConnection {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            L.i(TAG, "onServiceConnected...............");
-            mActivateStateServiceBinder = (PollingActivateStateService.ActivateStateServiceBinder) service;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            L.i(TAG, "onServiceDisconnected...............");
-        }
-    }
+//
+//    private class ActivateStateServiceConnection implements ServiceConnection {
+//        @Override
+//        public void onServiceConnected(ComponentName name, IBinder service) {
+//            L.i(TAG, "onServiceConnected...............");
+//            mActivateStateServiceBinder = (PollingActivateStateService.ActivateStateServiceBinder) service;
+//        }
+//
+//        @Override
+//        public void onServiceDisconnected(ComponentName name) {
+//            L.i(TAG, "onServiceDisconnected...............");
+//        }
+//    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (!activated && mActivateStateServiceConnection != null) {
-            unbindService(mActivateStateServiceConnection);
-        }
+//        if (!activated && mActivateStateServiceConnection != null) {
+//            unbindService(mActivateStateServiceConnection);
+//        }
         unregisterReceiver(mActivateStateReceiver);
     }
 }

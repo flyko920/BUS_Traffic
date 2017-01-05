@@ -3,7 +3,7 @@
     package="com.xcc.bustraffic.bustraffic">
 
     <!-- 添加访问手机位置的权限 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- 这个权限用于进行网络定位-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- 这个权限用于访问GPS定位-->
@@ -32,8 +32,6 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <!-- 用于优化GPS定位 -->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-
-
 
 
     <application
@@ -73,11 +71,14 @@
         <service
             android:name="com.baidu.trace.LBSTraceService"
             android:enabled="true"
-            android:exported="true" >
-        </service>
+            android:exported="true"></service>
 
-        <service android:name=".service.PollingActivateStateService"/>
-        <service android:name=".service.PollingActivateStateIntentService"/>
+        <service android:name=".service.PollingActivateStateService" />
+        <service android:name=".service.PollingActivateStateIntentService">
+            <intent-filter>
+                <action android:name="com.xcc.bustraffic.bustraffic.service" />
+            </intent-filter>
+        </service>
 
 
         <receiver android:name=".receivers.ApkInstallReceiver">

@@ -19,8 +19,12 @@ import retrofit2.Response;
 
 public class PollingActivateStateIntentService extends IntentService {
     public final String TAG = this.getClass().getSimpleName();
-    public PollingActivateStateIntentService(String name) {
-        super(name);
+//    public PollingActivateStateIntentService(String name) {
+//        super(name);
+//    }
+
+    public PollingActivateStateIntentService() {
+        super("PollingActivateStateIntentService");
     }
 
     @Override
@@ -28,13 +32,14 @@ public class PollingActivateStateIntentService extends IntentService {
         L.i(TAG, "onHandleIntent...............");
         do {
             getUserInfoSuccessOf();
-            if (SharedPrefsUtil.getValue(PollingActivateStateIntentService.this, "activated", false)) {
-                notificationUiUpdata();
-            }
+
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+            if (SharedPrefsUtil.getValue(PollingActivateStateIntentService.this, "activated", false)) {
+                notificationUiUpdata();
             }
         }
         while (!SharedPrefsUtil.getValue(PollingActivateStateIntentService.this, "activated", false));
@@ -42,6 +47,7 @@ public class PollingActivateStateIntentService extends IntentService {
 
     // 告知界面更新
     private void notificationUiUpdata() {
+        L.i(TAG, "notificationUiUpdata...............");
         Intent intent = new Intent("com.xcc.bustraffic.bustraffic.ui.activity");
         PollingActivateStateIntentService.this.sendBroadcast(intent);
     }
