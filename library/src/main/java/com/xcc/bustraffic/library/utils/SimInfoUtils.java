@@ -15,7 +15,7 @@ public class SimInfoUtils {
         return mTelephonyManager.getLine1Number();
     }
 
-    //获取SIM卡的序列号  SIMI 号
+    //获取SIM卡的序列号  IMSI 号
     public static String getSimSerialNumber(Context mContext) {
         TelephonyManager mTelephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
         return mTelephonyManager.getSimSerialNumber();

@@ -15,25 +15,25 @@ public class PollingActivateStateService extends Service {
 
     private ActivateStateServiceBinder mActivateStateServiceBinder;
     private Thread mThread;
-    private boolean activated;
     private Thread updataUiThread;
     public final String TAG = this.getClass().getSimpleName();
 
 
-    public class ActivateStateServiceBinder extends Binder{
+    public class ActivateStateServiceBinder extends Binder {
+
 
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        L.i(TAG,"onCreate...............");
+        L.i(TAG, "onCreate...............");
         mActivateStateServiceBinder = new ActivateStateServiceBinder();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        L.i(TAG,"onStartCommand...............");
+        L.i(TAG, "onStartCommand...............");
         mThread = new Thread(new ActivateStateRunable(this));
         mThread.start();
         // 告知界面更新
@@ -42,17 +42,27 @@ public class PollingActivateStateService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
+    @Override
+    public void onDestroy() {
+        if (mThread != null) {
+            mThread.interrupt();
+        }
+        if (updataUiThread != null) {
+            updataUiThread.interrupt();
+        }
+        super.onDestroy();
+    }
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        L.i(TAG,"onBind...............");
+        L.i(TAG, "onBind...............");
         return mActivateStateServiceBinder;
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
-        L.i(TAG,"onUnbind...............");
+        L.i(TAG, "onUnbind...............");
         mThread = null;
         return super.onUnbind(intent);
     }

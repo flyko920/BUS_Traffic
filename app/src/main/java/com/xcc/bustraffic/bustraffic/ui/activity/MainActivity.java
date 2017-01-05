@@ -20,8 +20,6 @@ import com.xcc.bustraffic.bustraffic.R;
 import com.xcc.bustraffic.bustraffic.api.NetApi;
 import com.xcc.bustraffic.bustraffic.api.callback.BastCallBack;
 import com.xcc.bustraffic.bustraffic.bean.DataVO;
-import com.xcc.bustraffic.bustraffic.bean.Result;
-import com.xcc.bustraffic.bustraffic.bean.UserInfo;
 import com.xcc.bustraffic.bustraffic.comfig.ApiComfig;
 import com.xcc.bustraffic.bustraffic.service.PollingActivateStateService;
 import com.xcc.bustraffic.bustraffic.ui.fragment.ActivateFailureFragment;
@@ -116,8 +114,6 @@ public class MainActivity extends BaseActivity {
         });
         mSimActivateFragment.setSimActivateClickListener(new SimActivateFragment.SimActivateClickListener() {
 
-            private String userPhone;
-
             @Override
             public void showActivateState(String success) {
                 L.i(TAG, "showActivateState...............");
@@ -180,7 +176,8 @@ public class MainActivity extends BaseActivity {
     private void updateMode(Response<DataVO.VersionVO> response) {
         ApkUpdateHelper mApkUpdateHelper = new ApkUpdateHelper();
         Integer updateStatus = response.body().getData().get(0).getUpdateStatus();
-        String url = response.body().getData().get(0).getDownloadUrl();
+//        String url = response.body().getData().get(0).getDownloadUrl();
+        String url = "http://releases.b0.upaiyun.com/hoolay.apk";
         switch (updateStatus) {
             case 1:                                                 //普通更新
                 mApkUpdateHelper.download(this, url);
@@ -196,14 +193,9 @@ public class MainActivity extends BaseActivity {
 
     }
 
-
-    private void updataApk() {
-        L.i(TAG, "updataApk...............");
-    }
-
     private void showWebView() {
         L.i(TAG, "showWebView...............");
-        root.addView(WebViewUtils.getWebViewInstance(this, ApiComfig.URL_MEMBER));
+        root.addView(WebViewUtils.getWebViewInstance(this, ApiComfig.URL_MEMBER+"imsi="+SimInfoUtils.getSimSerialNumber(this)));
     }
 
     //初始化激活状态
@@ -227,19 +219,19 @@ public class MainActivity extends BaseActivity {
         if ("true".equals(response.body().isSuccess() + "")) {                                                            // SIM卡已经激活成功
             activated = SharedPrefsUtil.getValue(MainActivity.this, "activated", false);
             SharedPrefsUtil.putObjectValue(MainActivity.this, "user_info", response.body().getData().get(0));
-            if (0 > ApiComfig.PACKAGE_DAY.compareTo(packageDay)) {                                                          //小于设定值，显示提醒用户当前剩余天数
+            if (0 < ApiComfig.PACKAGE_DAY.compareTo(packageDay)) {                                                        //小于设定值，显示提醒用户当前剩余天数
                 mSimActivateFragment.showDialog(MainActivity.this, packageDay);
             } else if ("0".equals(packageDay)) {                                                                          // 小于0天，服务到期，提示充值页面
-                showFragment(mBuyFragment, R.id.root);                                                                   //提示充值页面
+                showFragment(mBuyFragment, R.id.root);                                                                    //提示充值页面
             } else {
-                showWebView();                                                                                           // 显示会员H5页面
+                showWebView();                                                                                            // 显示会员H5页面
             }
-        } else {                                                                                                         // SIM卡未激活,显示SIM卡激活页面，并开启轮询服务
+        } else {                                                                                                          // SIM卡未激活,显示SIM卡激活页面，并开启轮询服务
             Intent service = new Intent(MainActivity.this, PollingActivateStateService.class);
             mActivateStateServiceConnection = new ActivateStateServiceConnection();
             bindService(service, mActivateStateServiceConnection, Service.BIND_AUTO_CREATE);
-            startService(service);                                                                                          //开启轮询服务
-            showSimActivateFragment();                                                                                      //显示SIM卡激活页面
+            startService(service);                                                                                        //开启轮询服务
+            showSimActivateFragment();                                                                                    //显示SIM卡激活页面
         }
     }
 
@@ -252,7 +244,6 @@ public class MainActivity extends BaseActivity {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             L.i(TAG, "onServiceConnected...............");
-
             mActivateStateServiceBinder = (PollingActivateStateService.ActivateStateServiceBinder) service;
         }
 

@@ -33,7 +33,7 @@ public class XCCDialog {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
 //                Toast.makeText(mActivity, R.string.main_activate_false + which, Toast.LENGTH_SHORT).show();
-                mActivity.onBackPressed();
+//                mActivity.onBackPressed();
             }
         });
         //参数都设置完成了，创建并显示出来
