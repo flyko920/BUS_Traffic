@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -50,6 +51,13 @@ public class MainActivity extends BaseActivity {
         public void onReceive(Context context, Intent intent) {
             showFragment(mActivateSucceedFragment, R.id.root);
             L.i(TAG, "onReceive...............");
+
+            new AsyncTask() {
+                @Override
+                protected Object doInBackground(Object[] params) {
+                    return null;
+                }
+            };
         }
     }
 
