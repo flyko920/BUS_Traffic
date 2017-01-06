@@ -168,10 +168,10 @@ public class MainActivity extends BaseActivity {
     }
 
     private void updateMode(Response<DataVO.VersionVO> response) {
+        L.i(TAG, "updateMode..............."+response.body().toString());
         ApkUpdateHelper mApkUpdateHelper = new ApkUpdateHelper();
         Integer updateStatus = response.body().getData().get(0).getUpdateStatus();
-//        String url = response.body().getData().get(0).getDownloadUrl();
-        String url = "http://releases.b0.upaiyun.com/hoolay.apk";
+        String url = response.body().getData().get(0).getDownloadUrl();
         switch (updateStatus) {
             case 1:                                                 //普通更新
                 mApkUpdateHelper.download(this, url);

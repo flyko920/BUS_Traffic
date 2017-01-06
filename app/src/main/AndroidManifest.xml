@@ -42,7 +42,7 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="58576275f29d9819c2001587" /> <!-- 小车车车机APP在友盟统计的APPKey_id -->
+            android:value="586f368d04e2056fef001c3c" /> <!-- 小车车车机APP在友盟统计的APPKey_id -->
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="debug" /> <!-- 友盟统计AppKey和渠道ID -->
