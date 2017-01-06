@@ -17,6 +17,7 @@ import com.xcc.bustraffic.bustraffic.api.NetApi;
 import com.xcc.bustraffic.bustraffic.api.callback.BastCallBack;
 import com.xcc.bustraffic.bustraffic.bean.DataVO;
 import com.xcc.bustraffic.bustraffic.comfig.ApiComfig;
+import com.xcc.bustraffic.bustraffic.service.PollingActivateStateIntentService;
 import com.xcc.bustraffic.bustraffic.ui.fragment.ActivateFailureFragment;
 import com.xcc.bustraffic.bustraffic.ui.fragment.ActivateSucceedFragment;
 import com.xcc.bustraffic.bustraffic.ui.fragment.BuyFragment;
@@ -220,7 +221,8 @@ public class MainActivity extends BaseActivity {
                 showWebView();                                                                                            // 显示会员H5页面
             }
         } else {                                                                                                          // SIM卡未激活,显示SIM卡激活页面，并开启轮询服务
-            Intent intent = new Intent("com.xcc.bustraffic.bustraffic.service");
+//            Intent intent = new Intent("com.xcc.bustraffic.bustraffic.service");
+            Intent intent = new Intent(this, PollingActivateStateIntentService.class);
             startService(intent);                                                                                         //开启轮询服务
             showSimActivateFragment();                                                                                    //显示SIM卡激活页面
         }
