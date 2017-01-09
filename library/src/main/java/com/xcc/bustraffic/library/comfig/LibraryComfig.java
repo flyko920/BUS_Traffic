@@ -6,6 +6,6 @@ package com.xcc.bustraffic.library.comfig;
 
 public class LibraryComfig {
     public static final String XCC_LOG = "XCC_LOG";
-    public static final boolean isLogEnabled = true;
+    public static final boolean isLogEnabled = false;
 
 }
